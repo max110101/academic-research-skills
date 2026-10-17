@@ -16,7 +16,7 @@
         "./academic-paper",
         "./academic-paper-reviewer",
         "./academic-pipeline",
-        "./deep-research",
+        "./deep-research-academic",
         "./sr-screener"
       ]
     }

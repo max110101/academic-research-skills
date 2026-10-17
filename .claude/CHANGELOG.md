@@ -39,7 +39,7 @@ Inspired by patterns from [aspi6246/Claude-Code-Skills-for-Academics](https://gi
 
 **Wave 2: Traceability + Cognitive Frameworks + Reinforcement**
 - R&R Traceability Matrix (Schema 11) in `shared/handoff_schemas.md`: `Author's Claim` + `Verified?` columns in re-review output
-- New reference: `deep-research/references/argumentation_reasoning_framework.md` (Toulmin, Bradford Hill, IBE, epistemic status)
+- New reference: `deep-research-academic/references/argumentation_reasoning_framework.md` (Toulmin, Bradford Hill, IBE, epistemic status)
 - New reference: `academic-paper-reviewer/references/review_quality_thinking.md` (three lenses, reviewer traps, calibration)
 - New reference: `academic-paper/references/writing_judgment_framework.md` (clarity test, reader's journey, voice, revision matrix)
 - Mid-conversation reinforcement protocol in pipeline: stage-specific IRON RULE + Anti-Pattern reminders at every transition
@@ -53,10 +53,10 @@ Inspired by patterns from [aspi6246/Claude-Code-Skills-for-Academics](https://gi
 
 **Historical fixes**:
 - Fixed date typo `2025-03-05` → `2026-03-05` in all 4 changelogs
-- Added missing Version Info tables to academic-paper and deep-research
+- Added missing Version Info tables to academic-paper and deep-research-academic
 - Fixed broken reference path `shared/integrity_verification_agent.md`
 
-**Version bumps**: deep-research v2.7, academic-paper v2.8, academic-paper-reviewer v1.7, academic-pipeline v3.0
+**Version bumps**: deep-research-academic v2.7, academic-paper v2.8, academic-paper-reviewer v1.7, academic-pipeline v3.0
 
 ---
 
@@ -64,7 +64,7 @@ Inspired by patterns from [aspi6246/Claude-Code-Skills-for-Academics](https://gi
 
 ### Style Calibration + Writing Quality Check (v2.9)
 
-**Files changed**: 10 files across `academic-paper/`, `deep-research/`, `academic-pipeline/`, `shared/`, root
+**Files changed**: 10 files across `academic-paper/`, `deep-research-academic/`, `academic-pipeline/`, `shared/`, root
 
 **New files**:
 - `shared/style_calibration_protocol.md`: Full calibration flow (6 dimensions: sentence length, paragraph length, vocabulary preferences, citation integration, modifier style, register shifts). Priority system: discipline norms (hard) > journal conventions (strong) > personal style (soft). Conflict resolution with user notification.
@@ -73,7 +73,7 @@ Inspired by patterns from [aspi6246/Claude-Code-Skills-for-Academics](https://gi
 **Modified agents**:
 - `academic-paper/agents/intake_agent.md`: New Step 10 (Style Calibration, optional). Renumbered Funding Sources to Step 11. Added `style_profile` field to Paper Configuration Record.
 - `academic-paper/agents/draft_writer_agent.md`: Step 1 pre-writing checklist gains Style Profile + Writing Quality Check items. Step 2 self-review gains Step 7 (style & lint check).
-- `deep-research/agents/report_compiler_agent.md`: New sections for optional Style Calibration and Writing Quality Check before Writing Style Guidelines.
+- `deep-research-academic/agents/report_compiler_agent.md`: New sections for optional Style Calibration and Writing Quality Check before Writing Style Guidelines.
 - `academic-pipeline/agents/pipeline_orchestrator_agent.md`: Style Profile carry-through in Material Passport.
 
 **Schema update**:
@@ -81,7 +81,7 @@ Inspired by patterns from [aspi6246/Claude-Code-Skills-for-Academics](https://gi
 
 **SKILL.md updates**:
 - `academic-paper/SKILL.md`: v2.4 -> v2.5
-- `deep-research/SKILL.md`: v2.3 -> v2.4
+- `deep-research-academic/SKILL.md`: v2.3 -> v2.4
 - `academic-pipeline/SKILL.md`: v2.6 -> v2.7
 
 **README updates**: EN + zh-TW both updated with v2.9 badge, new features in Features list, and changelog entry.
@@ -94,9 +94,9 @@ Inspired by patterns from [aspi6246/Claude-Code-Skills-for-Academics](https://gi
 
 ### Intent-Based Mode Activation (v2.6.2)
 
-**Files changed**: 6 files across `deep-research/`, `academic-paper/`, root
+**Files changed**: 6 files across `deep-research-academic/`, `academic-paper/`, root
 
-**deep-research/SKILL.md**:
+**deep-research-academic/SKILL.md**:
 - `### Socratic Mode Trigger Keywords` → `### Socratic Mode Activation`
 - Replaced keyword-matching logic with intent-based activation: 5 intent signals that work in any language
 - Added default rule: ambiguous intent → prefer `socratic` over `full`
@@ -120,9 +120,9 @@ Inspired by patterns from [aspi6246/Claude-Code-Skills-for-Academics](https://gi
 
 ### Bilingual Trigger Keywords for Socratic & Plan Mode (v2.6.1)
 
-**Files changed**: 4 files across `deep-research/`, `academic-paper/`
+**Files changed**: 4 files across `deep-research-academic/`, `academic-paper/`
 
-**deep-research** (2 files):
+**deep-research-academic** (2 files):
 - `SKILL.md`: Added Traditional Chinese (繁體中文) trigger keywords to YAML description, general Trigger Keywords section, and Socratic Mode Trigger Keywords section (6 Chinese keyword groups with variants). Added Chinese Quick Start examples. Quick Mode Selection Guide now bilingual.
 - `references/mode_selection_guide.md`: Added Chinese trigger examples for socratic mode (5 examples). Common misselection table now bilingual.
 
@@ -138,9 +138,9 @@ Inspired by patterns from [aspi6246/Claude-Code-Skills-for-Academics](https://gi
 
 ### Academic Skills Suite v2.6 — 15 Improvements Across 4 Skills
 
-**Files changed**: 30 files (17 new, 13 modified) across `deep-research/`, `academic-paper/`, `academic-paper-reviewer/`, `academic-pipeline/`, `shared/`
+**Files changed**: 30 files (17 new, 13 modified) across `deep-research-academic/`, `academic-paper/`, `academic-paper-reviewer/`, `academic-pipeline/`, `shared/`
 
-**deep-research v2.3** (+7 new files, 3 modified):
+**deep-research-academic v2.3** (+7 new files, 3 modified):
 - New systematic-review / PRISMA mode (7th mode) with 3 new agents: `risk_of_bias_agent` (RoB 2 + ROBINS-I), `meta_analysis_agent` (effect sizes, heterogeneity, GRADE), `monitoring_agent` (post-pipeline literature alerts)
 - New references: `systematic_review_toolkit.md`, `literature_monitoring_strategies.md`
 - New templates: `prisma_protocol_template.md`, `prisma_report_template.md`
@@ -175,12 +175,12 @@ Inspired by patterns from [aspi6246/Claude-Code-Skills-for-Academics](https://gi
 
 ### Full English Translation — All Skills Translated to English
 
-**Files changed**: All `.md` files across `academic-pipeline/`, `academic-paper/`, `academic-paper-reviewer/`, `deep-research/`
+**Files changed**: All `.md` files across `academic-pipeline/`, `academic-paper/`, `academic-paper-reviewer/`, `deep-research-academic/`
 
 **Changes**:
 - Translated all Chinese content to English across 68+ files (agents, references, templates, examples, SKILL.md)
 - TSSCI journal names in `top_journals_by_field.md` retain official Chinese names as proper nouns (with English translations)
-- Privacy scan: removed residual `HEEACT Luminai` reference from `deep-research/references/socratic_questioning_framework.md`
+- Privacy scan: removed residual `HEEACT Luminai` reference from `deep-research-academic/references/socratic_questioning_framework.md`
 - `README.zh-TW.md` intentionally kept in Chinese as the bilingual README option
 
 ---
@@ -242,7 +242,7 @@ Inspired by patterns from [aspi6246/Claude-Code-Skills-for-Academics](https://gi
 
 **Files changed**: 19 files across 4 skills (+550 lines)
 
-**deep-research v2.2**:
+**deep-research-academic v2.2**:
 - Added cross-agent quality alignment definitions (peer-reviewed, currency rule, CRITICAL severity, source tier, minimum source count, verification threshold)
 - Synthesis anti-patterns, Socratic quantified thresholds & auto-end conditions
 - Reference existence verification (DOI + WebSearch)
@@ -280,7 +280,7 @@ Inspired by patterns from [aspi6246/Claude-Code-Skills-for-Academics](https://gi
 **Files changed**:
 - `academic-paper-reviewer/SKILL.md` (570→470, -100 lines)
 - `academic-pipeline/SKILL.md` (675→535, -140 lines)
-- `deep-research/SKILL.md` (469→435, -34 lines)
+- `deep-research-academic/SKILL.md` (469→435, -34 lines)
 - `academic-paper/SKILL.md` (540→443, -97 lines)
 
 **Changes**:
@@ -289,7 +289,7 @@ Inspired by patterns from [aspi6246/Claude-Code-Skills-for-Academics](https://gi
 - C: Pipeline — simplified Two-Stage Review Protocol to inputs/outputs/branching only
 - D: 3 skills — "Full Academic Pipeline" section replaced with one-line reference to `academic-pipeline/SKILL.md`
 - E: 4 skills — trimmed routing tables, removed HEI routes already defined in root CLAUDE.md
-- F+G: Removed duplicate Mode Selection sections from deep-research and academic-paper
+- F+G: Removed duplicate Mode Selection sections from deep-research-academic and academic-paper
 - H: academic-paper Handoff Protocol simplified to overview + upstream reference
 - I: academic-paper Phase 0 Config replaced with reference to `agents/intake_agent.md`
 - J: 4 skills — Output Language sections reduced to 1 line each

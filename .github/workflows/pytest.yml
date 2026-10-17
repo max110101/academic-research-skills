@@ -12,7 +12,7 @@ on:
       - '.github/workflows/pytest.yml'
       - 'academic-pipeline/references/adapters/**'
       - 'academic-pipeline/references/literature_corpus_consumers.md'
-      - 'deep-research/agents/bibliography_agent.md'
+      - 'deep-research-academic/agents/bibliography_agent.md'
   push:
     branches: [main]
     paths:
@@ -25,7 +25,7 @@ on:
       - '.github/workflows/pytest.yml'
       - 'academic-pipeline/references/adapters/**'
       - 'academic-pipeline/references/literature_corpus_consumers.md'
-      - 'deep-research/agents/bibliography_agent.md'
+      - 'deep-research-academic/agents/bibliography_agent.md'
 
 concurrency:
   # Suffix by event_name so push (branches: [main]) and pull_request

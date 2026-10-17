@@ -6,7 +6,7 @@ A suite of Claude Code skills for rigorous academic research, paper writing, pee
 
 | Skill | Purpose | Key Modes |
 |-------|---------|-----------|
-| `deep-research` v2.12.1 | 13-agent research team | full, quick, socratic, review, lit-review, three-way-scan, fact-check, systematic-review |
+| `deep-research-academic` v2.12.1 | 13-agent research team | full, quick, socratic, review, lit-review, three-way-scan, fact-check, systematic-review |
 | `academic-paper` v3.3.1 | 12-agent paper writing | full, plan, outline-only, revision, revision-coach, abstract-only, lit-review, format-convert, citation-check, disclosure, rebuttal-audit |
 | `academic-paper-reviewer` v1.11.1 | Multi-perspective paper review (5 reviewers + optional cross-model DA critique) | full, re-review, quick, methodology-focus, guided, calibration |
 | `academic-pipeline` v3.23.1 | Full pipeline orchestrator | (coordinates all above) |
@@ -125,7 +125,7 @@ A suite of Claude Code skills for rigorous academic research, paper writing, pee
 
 ## v3.15 Key Additions (release-gate hardening + prompt-debt retirement round 2 + defrift locks)
 
-- **Prompt-debt retirement round 2 (#489 → #490).** Deep-scanned the 17 agents the #476 pass deferred (all 5 academic-pipeline, 5 deep-research, 5 academic-paper, field_analyst, compliance_agent) via 4 parallel batches + codex cross-model challenge. 13 findings (2 P1 + 11 P2, 2 user-rejected): both `socratic_mentor` agents carried live self-contradictions (stale "quit after 15 rounds" vs documented typical 20-30) — auto-end machinery merged to a single authority per file, threshold 30; the repo-wide stale "hook deferred to #134" enforcement sentence (false since PR #294) rewritten at 29 surfaces; few-shot/duplication trims across 7 agents. The 2026-06-10 F-007 negative-framing deferred item closes as verified-no-rewrite-needed. Report: `audits/harness-retirement-2026-07-04.md`.
+- **Prompt-debt retirement round 2 (#489 → #490).** Deep-scanned the 17 agents the #476 pass deferred (all 5 academic-pipeline, 5 deep-research-academic, 5 academic-paper, field_analyst, compliance_agent) via 4 parallel batches + codex cross-model challenge. 13 findings (2 P1 + 11 P2, 2 user-rejected): both `socratic_mentor` agents carried live self-contradictions (stale "quit after 15 rounds" vs documented typical 20-30) — auto-end machinery merged to a single authority per file, threshold 30; the repo-wide stale "hook deferred to #134" enforcement sentence (false since PR #294) rewritten at 29 surfaces; few-shot/duplication trims across 7 agents. The 2026-06-10 F-007 negative-framing deferred item closes as verified-no-rewrite-needed. Report: `audits/harness-retirement-2026-07-04.md`.
 - **Defrift locks (#491 → #492).** `check_v3_9_2_phase_boundary.py` invariant 4 pins the canonical enforcement sentence verbatim across all 23 Bucket A blocks (the drift class that sat wrong for a month now fails CI); new `check_setup_cross_model_parity.py` pins SETUP en/zh-TW `ARS_CROSS_MODEL` examples to each other and to the canonical model tables (table-column-scoped after a codex P1); local pytest manifest gains the v3.9.4 temporal test whose CI-only coverage caused a local-green/CI-red split (58 → 60 entries).
 - **Release-gate hardening (#483, #487, #486).** `check_changelog_covers_merges.py` pre-tag gate (every release-worthy merge since the previous tag must be documented in CHANGELOG, fail-closed); version-consistency invariants 9-11 (release-notes body ≥100 chars, Last-Updated within ±7 days of the CHANGELOG date, Key-Additions heading matches suite version) + a `tag-version-match.yml` gate re-running the full lint at tag time; command-invariants gate pinning the SessionStart announce list to the actual 16-command inventory (announce list had drifted twice).
 - **DOI badge fix (#482).** Served from shields.io (Zenodo's badge endpoint rate-limits GitHub's image proxy); link target stays the concept DOI.
@@ -143,7 +143,7 @@ A suite of Claude Code skills for rigorous academic research, paper writing, pee
 - **Write-scope guard: `CLAUDE.md` dropped from infra-protected globs (#459).** Closes the residual half of #448/#449. Under the git-clone + symlink install layout `plugin_root` collapses onto `workspace_root`, so the bare `CLAUDE.md` / `.claude/CLAUDE.md` infra globs re-denied the user's own `CLAUDE.md`. `CLAUDE.md` is documentation, not a load-bearing enforcement file, so it is removed from the infra list; every load-bearing file (guard script, manifest, hooks, plugin metadata, agent frontmatter, lint) stays protected.
 - **Windows Python hook portability + graceful no-Python degradation (#454).** The PreToolUse write-scope guard is now launched via a cross-platform `hooks/run_guard.sh` that finds a real interpreter (rejecting the 0-byte Microsoft Store `python3` stub) and runs the guard as a time-bounded supervised subprocess; if no interpreter is found or the guard misbehaves, the launcher emits a valid pass-through and never spams the hook log.
 - **Provider-agnostic cross-model verification (#455).** The cross-model verification layer accepts OpenAI-compatible endpoints (MiMo, DeepSeek, self-hosted) alongside first-party OpenAI, with the grounded first-party path preserved and never silently downgraded.
-- **Opt-in Socratic adjacent-framing probe (#461; `deep-research` 2.10.0 → 2.11.0).** When `ARS_SOCRATIC_ADJACENT_PROBE=1`, the Socratic Mentor may surface ONE adjacent research framing as a pure question during exploratory Layer-1 framing (STORM-borrowed perspective expansion). Default OFF, prose-layer only, Kong L2 verb-test bounded.
+- **Opt-in Socratic adjacent-framing probe (#461; `deep-research-academic` 2.10.0 → 2.11.0).** When `ARS_SOCRATIC_ADJACENT_PROBE=1`, the Socratic Mentor may surface ONE adjacent research framing as a pure question during exploratory Layer-1 framing (STORM-borrowed perspective expansion). Default OFF, prose-layer only, Kong L2 verb-test bounded.
 
 Spec: `docs/design/2026-06-16-448-infra-protection-plugin-root-scope-spec.md` (+ the #454/#453/adjacent-probe design docs).
 
@@ -217,8 +217,8 @@ Spec: `docs/design/2026-05-12-ars-v3.7.3-claim-faithfulness-and-contaminated-sou
 **External motivation:** Zhao et al. arXiv:2605.07723 (2026-05) §3 — cross-index triangulation across multiple bibliographic indexes is a viable false-positive-reduction strategy for hallucinated-citation detection. v3.7.3 shipped single-index (Semantic Scholar) detection; v3.9.0 extends to three-index triangulation (S2 + OpenAlex + Crossref) as **advisory evidence only**. Terminal gate behavior unchanged from v3.7.3.
 
 **Schema additions (additive):**
-- `contamination_signals.openalex_unmatched` (optional bool) — per `deep-research/references/openalex_api_protocol.md`.
-- `contamination_signals.crossref_unmatched` (optional bool) — per `deep-research/references/crossref_api_protocol.md`.
+- `contamination_signals.openalex_unmatched` (optional bool) — per `deep-research-academic/references/openalex_api_protocol.md`.
+- `contamination_signals.crossref_unmatched` (optional bool) — per `deep-research-academic/references/crossref_api_protocol.md`.
 - Manual-entry not-rule extends from `required: [semantic_scholar_unmatched]` to `anyOf: [s2, openalex, crossref]` — manual entries cannot carry any lookup unmatched field. Preprint flag remains exempt (heuristic, not lookup).
 
 **Finalizer 4-tier advisory matrix (all advisory, gate unchanged):**
@@ -244,7 +244,7 @@ Spec: `docs/design/2026-05-17-ars-v3.9.0-cross-index-triangulation-measurement-s
 
 - **Claude Code plugin packaging**: ARS now installs in one line via `/plugin marketplace add Imbad0202/academic-research-skills` + `/plugin install academic-research-skills`. The traditional `git clone + symlink to ~/.claude/skills/` flow continues to work — both tracks are first-class. Repo gains four top-level directories: `.claude-plugin/`, `commands/`, `agents/`, `hooks/`, plus a `skills/` symlink dir; existing 4 skill directories untouched.
 - **10 slash commands** (`commands/ars-*.md`) mapping `MODE_REGISTRY.md` entries to `/ars-<mode>` triggers — `sonnet` pinned in frontmatter for the light modes (cost routing); the heavy modes (`full`, `reviewer`, `revision-coach`) inherit the session model (the original v3.7.0 `opus` floor was retired in the 2026-06 Fable 5 harness pass — under a stronger session model a floor becomes a downgrade ceiling), no Haiku.
-- **3 plugin-shipped agents** (`agents/*_agent.md`) as relative symlinks to the v3.6.7-hardened downstream agents in `deep-research/agents/` (materialized to real byte-identical copies in #413 — symlinks break Windows checkouts and zip installs; `scripts/check_agents_mirror_sync.py` now pins the byte-equality in CI). Source frontmatter gains `model: inherit` so an Opus session keeps Opus agents while the user's PreToolUse `warn-agent-no-model.sh` hook gates Haiku at dispatch.
+- **3 plugin-shipped agents** (`agents/*_agent.md`) as relative symlinks to the v3.6.7-hardened downstream agents in `deep-research-academic/agents/` (materialized to real byte-identical copies in #413 — symlinks break Windows checkouts and zip installs; `scripts/check_agents_mirror_sync.py` now pins the byte-equality in CI). Source frontmatter gains `model: inherit` so an Opus session keeps Opus agents while the user's PreToolUse `warn-agent-no-model.sh` hook gates Haiku at dispatch.
 - **SessionStart announce hook** (`hooks/hooks.json` + `scripts/announce-ars-loaded.sh`) lists the 10 slash commands + 3 agents + token-budget pointer when the plugin loads. Bash 3.2 compatible.
 - **Phase 2.2 scope reduction note**: a `SubagentStop → run_codex_audit.sh` cross-model audit hook was scoped out for v3.7.0 (contract gap: hook payload carries no stage/deliverable; invoker boundary: same-session in-LLM Bash forbidden by the wrapper). Deferred to a future release.
 
@@ -273,7 +273,7 @@ Spec: `docs/design/2026-05-17-ars-v3.9.0-cross-index-triangulation-measurement-s
 
 ## v3.6.5 Key Additions
 
-- **Material Passport `literature_corpus[]` consumer integration in Phase 1**: `deep-research/agents/bibliography_agent.md` and `academic-paper/agents/literature_strategist_agent.md` now read `literature_corpus[]` via the **corpus-first, search-fills-gap** flow when the passport carries a non-empty corpus. Both consumers follow the same five-step shared flow (Step 0 presence detection → Step 1 pre-screen → Step 2 search-fills-gap → Step 3 merge → Step 4 emit Search Strategy report) and the same four Iron Rules (Same criteria / No silent skip / No corpus mutation / Graceful fallback on parse failure).
+- **Material Passport `literature_corpus[]` consumer integration in Phase 1**: `deep-research-academic/agents/bibliography_agent.md` and `academic-paper/agents/literature_strategist_agent.md` now read `literature_corpus[]` via the **corpus-first, search-fills-gap** flow when the passport carries a non-empty corpus. Both consumers follow the same five-step shared flow (Step 0 presence detection → Step 1 pre-screen → Step 2 search-fills-gap → Step 3 merge → Step 4 emit Search Strategy report) and the same four Iron Rules (Same criteria / No silent skip / No corpus mutation / Graceful fallback on parse failure).
 - **PRE-SCREENED reproducibility block**: Search Strategy reports gain a PRE-SCREENED FROM USER CORPUS block enumerating included / excluded / skipped corpus entries, with F3 zero-hit note and F4a–F4f provenance reporting that compose around partial declaration of `obtained_via` / `obtained_at`. `final_included = pre_screened_included[] ∪ external_included[]` stays neutral — no provenance tags on bibliography entries or literature matrix rows.
 - **Consumer protocol reference**: `academic-pipeline/references/literature_corpus_consumers.md` carries the canonical PRE-SCREENED template, BAD/GOOD examples, four Iron Rules, and per-consumer reading instructions. Both consumer agents backpoint to this reference.
 - **CI lint** `scripts/check_corpus_consumer_protocol.py` enforcing nine protocol invariants with manifest-driven consumer list (`scripts/corpus_consumer_manifest.json`).
@@ -302,7 +302,7 @@ Spec: `docs/design/2026-05-17-ars-v3.9.0-cross-index-triangulation-measurement-s
 
 ## v3.5.1 Key Additions
 
-- **Opt-in Socratic reading-check probe**: new §"Optional Reading Probe Layer" in `deep-research/agents/socratic_mentor_agent.md`. Gated by `ARS_SOCRATIC_READING_PROBE=1`. Fires at most once per goal-oriented Socratic session when the user has cited a specific paper. Decline is logged without penalty. Outcome is recorded inline in the Research Plan Summary and carried into the Stage 6 AI Self-Reflection Report. No new agent, no new mode, no schema change. See `docs/design/2026-04-22-ars-v3.7.3-reading-check-probe-design.md`.
+- **Opt-in Socratic reading-check probe**: new §"Optional Reading Probe Layer" in `deep-research-academic/agents/socratic_mentor_agent.md`. Gated by `ARS_SOCRATIC_READING_PROBE=1`. Fires at most once per goal-oriented Socratic session when the user has cited a specific paper. Decline is logged without penalty. Outcome is recorded inline in the Research Plan Summary and carried into the Stage 6 AI Self-Reflection Report. No new agent, no new mode, no schema change. See `docs/design/2026-04-22-ars-v3.7.3-reading-check-probe-design.md`.
 
 ## v3.5 Key Additions
 
@@ -317,7 +317,7 @@ Spec: `docs/design/2026-05-17-ars-v3.9.0-cross-index-triangulation-measurement-s
 
 ## v3.3 Key Additions
 
-- **Semantic Scholar API Verification**: Tier 0 programmatic reference verification. See `deep-research/references/semantic_scholar_api_protocol.md`.
+- **Semantic Scholar API Verification**: Tier 0 programmatic reference verification. See `deep-research-academic/references/semantic_scholar_api_protocol.md`.
 - **Anti-Leakage Protocol**: Knowledge isolation prioritizing session materials over LLM memory. See `academic-paper/references/anti_leakage_protocol.md`.
 - **VLM Figure Verification**: Optional closed-loop figure verification via vision LLM. See `academic-paper/references/vlm_figure_verification.md`.
 - **Score Trajectory Protocol**: Per-dimension rubric score delta tracking across revision rounds. See `academic-pipeline/references/score_trajectory_protocol.md`.
@@ -360,7 +360,7 @@ Otherwise, classify the user's input:
 3. **Ambiguous intent, no materials** — user provides no artifacts and no clear request:
    → Clarify per `shared/references/intent_clarification_protocol.md`.
 
-**Screening boundary (sr-screener):** a request to screen records the user already has (database exports, pasted abstracts, full-text PDFs) against a review's eligibility criteria, or to build a screening protocol, pilot the screening, adjudicate screening conflicts, audit exclusions, or report the selection counts, routes to `sr-screener`. A request to write a literature review, or to run a systematic review, meta-analysis, or PRISMA report, does not route to `sr-screener`. Screening starts only when the user asks for it: `deep-research` `systematic-review` mode may mention `sr-screener`, but never hands over to it automatically.
+**Screening boundary (sr-screener):** a request to screen records the user already has (database exports, pasted abstracts, full-text PDFs) against a review's eligibility criteria, or to build a screening protocol, pilot the screening, adjudicate screening conflicts, audit exclusions, or report the selection counts, routes to `sr-screener`. A request to write a literature review, or to run a systematic review, meta-analysis, or PRISMA report, does not route to `sr-screener`. Screening starts only when the user asks for it: `deep-research-academic` `systematic-review` mode may mention `sr-screener`, but never hands over to it automatically.
 
 **Anti-pattern (caused #133):** Receiving ambiguous cross-phase materials and silently auto-routing to a single-phase agent based on which phase the materials "look closest to." This bypasses orchestrator-level reconciliation and lets the subagent inherit the full ambiguity without independent oversight.
 <!-- routing-core:end -->
@@ -371,9 +371,9 @@ Otherwise, classify the user's input:
 
 1. **academic-pipeline vs individual skills**: academic-pipeline = full pipeline orchestrator (research → write → integrity → review → revise → final integrity → finalize). If the user only needs a single function (just research, just write, just review), trigger the corresponding skill directly without the pipeline.
 
-2. **deep-research vs academic-paper**: Complementary. deep-research = upstream research engine (investigation + fact-checking), academic-paper = downstream publication engine (paper writing + bilingual abstracts). Recommended flow: deep-research → academic-paper.
+2. **deep-research-academic vs academic-paper**: Complementary. deep-research-academic = upstream research engine (investigation + fact-checking), academic-paper = downstream publication engine (paper writing + bilingual abstracts). Recommended flow: deep-research-academic → academic-paper.
 
-3. **deep-research socratic vs full**: socratic = guided Socratic dialogue to help users clarify their research question. full = direct production of research report. When the user's research question is unclear, suggest socratic mode.
+3. **deep-research-academic socratic vs full**: socratic = guided Socratic dialogue to help users clarify their research question. full = direct production of research report. When the user's research question is unclear, suggest socratic mode.
 
 4. **academic-paper plan vs full**: plan = chapter-by-chapter guided planning via Socratic dialogue. full = direct paper production. When the user wants to think through their paper structure, suggest plan mode.
 
@@ -381,7 +381,7 @@ Otherwise, classify the user's input:
 
 6. **rebuttal-audit vs revision-coach (input-shape gate)**: both touch reviewer comments, so route by INPUT SHAPE, not verbs. Route to `academic-paper rebuttal-audit` ONLY when the user supplies BOTH the reviewer comments AND an existing rebuttal/response draft to evaluate (it does advisory QA, generates nothing). If only reviewer comments are present (no draft yet), route to `revision-coach` (it generates a Response Letter Skeleton). If unclear which, clarify rather than guess. `rebuttal-audit` is standalone/advisory and never emits Schema 11 or marks anything verified.
 7. **real-committee correspondence vs peer review (#668)**: route to the `revision-coach` committee-correspondence variant only when the user explicitly identifies a real committee or institutional review office. Formal tone and words such as “required” do not establish authority. That branch loads `academic-paper/references/committee_correspondence_protocol.md`, preserves the source, and emits its separate concern tracker; it never emits reviewer priority/severity, Schema 11, a determination, or a resolution claim.
-8. **sr-screener vs deep-research systematic-review**: route to `sr-screener` when the user wants eligibility decisions on records they already have (database exports, pasted abstracts, full-text PDFs), or a screening protocol, pilot, conflict adjudication, exclusion audit, or selection-process report. Route to `deep-research` `systematic-review` when the user wants the review itself (question, search, synthesis, PRISMA report). A bare "systematic review" or "PRISMA" request stays with `deep-research`; PRISMA flow numbers for a finished screening go to `sr-screener` `report`. `sr-screener` owns screening decisions; the other skills read its `literature_corpus[]` output and do not re-screen it. Screening starts only when the user asks for it; `systematic-review` mode never hands over to `sr-screener` automatically (routing core, Screening boundary).
+8. **sr-screener vs deep-research-academic systematic-review**: route to `sr-screener` when the user wants eligibility decisions on records they already have (database exports, pasted abstracts, full-text PDFs), or a screening protocol, pilot, conflict adjudication, exclusion audit, or selection-process report. Route to `deep-research-academic` `systematic-review` when the user wants the review itself (question, search, synthesis, PRISMA report). A bare "systematic review" or "PRISMA" request stays with `deep-research-academic`; PRISMA flow numbers for a finished screening go to `sr-screener` `report`. `sr-screener` owns screening decisions; the other skills read its `literature_corpus[]` output and do not re-screen it. Screening starts only when the user asks for it; `systematic-review` mode never hands over to `sr-screener` automatically (routing core, Screening boundary).
 
 ## Key Rules
 
@@ -394,7 +394,7 @@ Otherwise, classify the user's input:
 ## Full Academic Pipeline
 
 ```
-deep-research (socratic/full)
+deep-research-academic (socratic/full)
   → academic-paper (plan/full)
     → integrity check (Stage 2.5)
       → academic-paper-reviewer (full/guided)
@@ -407,7 +407,7 @@ deep-research (socratic/full)
 
 ## Handoff Protocol
 
-### deep-research → academic-paper
+### deep-research-academic → academic-paper
 Materials: RQ Brief, Methodology Blueprint, Annotated Bibliography, Synthesis Report, INSIGHT Collection
 
 ### academic-paper → academic-paper-reviewer
@@ -416,7 +416,7 @@ Materials: Complete paper text. field_analyst_agent auto-detects domain and conf
 ### academic-paper-reviewer → academic-paper (revision)
 Materials: Editorial Decision Letter, Revision Roadmap, Per-reviewer detailed comments
 
-### deep-research → sr-screener → academic-paper (systematic reviews)
+### deep-research-academic → sr-screener → academic-paper (systematic reviews)
 Materials in: screening protocol source (proposal, PROSPERO record, or `systematic-review` mode protocol), database exports (RIS, PubMed .nbib, Web of Science, CSV), full-text PDFs. Materials out: `*_literature_corpus.yaml` (`literature_corpus[]` entries for the Material Passport), PRISMA 2020 counts, methods draft, exclusion reasons, screening log.
 
 ## Version Info
