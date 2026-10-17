@@ -7,16 +7,16 @@
 | Date | 2026-07-01 |
 | Target model | **Opus 4.8** (`claude-opus-4-8[1m]`) — inherited Claude Code session model |
 | Scope | Issue #476 — the **22 Bucket A agents only** (agent prompt bodies, under the v3.9.2 Phase Boundary fence). NOT the ~11 non-Bucket-A agents in the same dirs (see manifest below). |
-| Files scanned | 22 (`deep-research/agents/*.md` ×9, `academic-paper/agents/*.md` ×7, `academic-paper-reviewer/agents/*.md` ×6) — 8,111 prompt lines |
+| Files scanned | 22 (`deep-research-academic/agents/*.md` ×9, `academic-paper/agents/*.md` ×7, `academic-paper-reviewer/agents/*.md` ×6) — 8,111 prompt lines |
 | Method | 3 parallel opus sub-agents (one per skill family) + first-party grep (Cat 1/3/5) + **independent codex cross-model challenge pass** |
 | Auditor | `/harness-retirement` skill v0.1.0 |
 
 ### The exact 22 Bucket A files (manifest — resolves the "dir has 33 .md, report says 22" ambiguity codex raised)
 
-- **deep-research (9):** `research_question`, `research_architect`, `bibliography`, `source_verification`, `synthesis`, `editor_in_chief`, `ethics_review`, `risk_of_bias`, `meta_analysis`
+- **deep-research-academic (9):** `research_question`, `research_architect`, `bibliography`, `source_verification`, `synthesis`, `editor_in_chief`, `ethics_review`, `risk_of_bias`, `meta_analysis`
 - **academic-paper (7):** `literature_strategist`, `structure_architect`, `draft_writer`, `citation_compliance`, `abstract_bilingual`, `peer_reviewer`, `formatter`
 - **academic-paper-reviewer (6):** `eic`, `methodology_reviewer`, `domain_reviewer`, `perspective_reviewer`, `devils_advocate_reviewer`, `editorial_synthesizer`
-- **NOT in scope** (present in the dirs, excluded by issue #476): `monitoring`, `timeline_extraction`, `devils_advocate` (deep-research), `socratic_mentor` (×2), `intake`, `argument_builder`, `visualization`, `revision_coach`, `field_analyst`, `shared/agents/compliance`. A future wider pass should cover these.
+- **NOT in scope** (present in the dirs, excluded by issue #476): `monitoring`, `timeline_extraction`, `devils_advocate` (deep-research-academic), `socratic_mentor` (×2), `intake`, `argument_builder`, `visualization`, `revision_coach`, `field_analyst`, `shared/agents/compliance`. A future wider pass should cover these.
 
 ## Executive summary
 
@@ -95,7 +95,7 @@ Step 3: If unable to determine -> ask user; if user does not respond -> default 
 
 ---
 
-### [F-003] `deep-research/agents/research_question_agent.md:128-137` — Category 6 (negative framing)
+### [F-003] `deep-research-academic/agents/research_question_agent.md:128-137` — Category 6 (negative framing)
 
 **Excerpt**
 ```
@@ -208,7 +208,7 @@ The audit examined and **deliberately did not flag** the following. This list is
 ## Coverage note
 
 All 22 files read in full (end-to-end `cat -n`, no truncation), 3 parallel opus sub-agents, then one codex cross-model challenge pass:
-- **deep-research (9)**: 8/9 zero findings; 1 P2 (F-003).
+- **deep-research-academic (9)**: 8/9 zero findings; 1 P2 (F-003).
 - **academic-paper (7)**: 5/7 zero findings; primary pass found 2 P2 (F-001, F-002); codex challenge added 2 more, both in `draft_writer` (F-004, F-005).
 - **academic-paper-reviewer (6)**: 6/6 zero findings (codex re-examined the reviewer anti-sycophancy/Output-Discipline surface and confirmed no *retirable* debt — only the cross-file duplication maintainability item).
 

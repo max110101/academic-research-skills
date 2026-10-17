@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-11
 **Scope:** the `## Wording-Pattern Advisory` section in both
-`deep-research/agents/socratic_mentor_agent.md` and
+`deep-research-academic/agents/socratic_mentor_agent.md` and
 `academic-paper/agents/socratic_mentor_agent.md` (identical change in both).
 **Provenance chain:** PR #468 review thread → #501 → PR #503/#504 (baseline
 measurement, miss rate HIGH) → issue #505 → this change.

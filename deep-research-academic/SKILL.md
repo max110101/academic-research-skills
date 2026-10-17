@@ -1,5 +1,5 @@
 ---
-name: deep-research
+name: deep-research-academic
 description: "Universal deep research agent team. 13-agent pipeline for rigorous academic research on any topic. 8 modes: full research, quick brief, paper review, lit-review, fact-check, three-way literature scan, Socratic guided research dialogue, and systematic review with optional meta-analysis. Covers research question formulation, Socratic mentoring, methodology design, systematic literature search, source verification, cross-source synthesis, risk of bias assessment, meta-analysis, APA 7.0 report compilation, editorial review, devil's advocate challenges, ethics review, and post-research literature monitoring. Triggers on: research, deep research, literature review, systematic review, meta-analysis, PRISMA, evidence synthesis, fact-check, WHY HOW WHAT papers, 3W literature scan, guide my research, help me think through, 研究, 深度研究, 文獻回顧, 文獻探討, 系統性回顧, 後設分析, 事實查核, 三段式文獻掃描, 引導我的研究, 幫我釐清, 幫我想想, 我不確定要研究什麼, 研究方向, 研究主題, 심층 연구, 문헌 조사, 체계적 문헌고찰, 메타분석, 사실 확인, 연구 방향을 잡아줘, 연구 주제 정하는 것을 도와줘, revisión de literatura, metaanálisis"
 metadata:
   version: "2.12.1"
@@ -38,7 +38,7 @@ Otherwise, classify the user's input:
 3. **Ambiguous intent, no materials** — user provides no artifacts and no clear request:
    → Clarify per `shared/references/intent_clarification_protocol.md`.
 
-**Screening boundary (sr-screener):** a request to screen records the user already has (database exports, pasted abstracts, full-text PDFs) against a review's eligibility criteria, or to build a screening protocol, pilot the screening, adjudicate screening conflicts, audit exclusions, or report the selection counts, routes to `sr-screener`. A request to write a literature review, or to run a systematic review, meta-analysis, or PRISMA report, does not route to `sr-screener`. Screening starts only when the user asks for it: `deep-research` `systematic-review` mode may mention `sr-screener`, but never hands over to it automatically.
+**Screening boundary (sr-screener):** a request to screen records the user already has (database exports, pasted abstracts, full-text PDFs) against a review's eligibility criteria, or to build a screening protocol, pilot the screening, adjudicate screening conflicts, audit exclusions, or report the selection counts, routes to `sr-screener`. A request to write a literature review, or to run a systematic review, meta-analysis, or PRISMA report, does not route to `sr-screener`. Screening starts only when the user asks for it: `deep-research-academic` `systematic-review` mode may mention `sr-screener`, but never hands over to it automatically.
 
 **Anti-pattern (caused #133):** Receiving ambiguous cross-phase materials and silently auto-routing to a single-phase agent based on which phase the materials "look closest to." This bypasses orchestrator-level reconciliation and lets the subagent inherit the full ambiguity without independent oversight.
 <!-- routing-core:end -->
@@ -195,8 +195,8 @@ The author decides whether to run a systematic review. ARS reminds the author th
 
 **When to show it.** Show the note at the first of these two points. Both are actions the author takes:
 
-1. The author selects `lit-review` mode (in `deep-research` or `academic-paper`, by slash command or by request).
-2. The author confirms the research question: in `deep-research` `full` mode, the author confirms the RQ Brief before Phase 2; in `socratic` mode, the author confirms the Mentor's closing RQ Brief or RQ Summary as their research question. Show the note right after that confirmation. A Socratic ending the author has not confirmed (a turn-cap ending, an ending the author calls unfinished, the stagnation suggestion to switch to `full` mode, or a switch to `full` mode) is not this point; a later confirmation is.
+1. The author selects `lit-review` mode (in `deep-research-academic` or `academic-paper`, by slash command or by request).
+2. The author confirms the research question: in `deep-research-academic` `full` mode, the author confirms the RQ Brief before Phase 2; in `socratic` mode, the author confirms the Mentor's closing RQ Brief or RQ Summary as their research question. Show the note right after that confirmation. A Socratic ending the author has not confirmed (a turn-cap ending, an ending the author calls unfinished, the stagnation suggestion to switch to `full` mode, or a switch to `full` mode) is not this point; a later confirmation is.
 
 Whether the note appears must not depend on the topic, the wording, or the kind of research question. Do not show it at any other point, and do not show it, or hold it back, because a question looks like an effect question.
 
@@ -215,7 +215,7 @@ Whether the note appears must not depend on the topic, the wording, or the kind 
 **After the reply.**
 
 - Skip, or a reply that keeps the current work: continue in the current mode. Skipping is a decision.
-- Systematic review: offer `deep-research` `systematic-review` mode, and enter it only when the author confirms.
+- Systematic review: offer `deep-research-academic` `systematic-review` mode, and enter it only when the author confirms.
 - Scoping review or rapid review: continue in the current mode, and say once that ARS has no separate mode for this form, so its protocol and reporting checklist (PRISMA-ScR for a scoping review) stay with the author.
 - Narrative or integrative review, or no formal review: continue in the current mode.
 - In a run with a passport file, record the note through `scripts/run_ledger.py append`: before waiting, unless the ledger already holds one, a `checkpoint_opened` entry (`checkpoint_id: review-form-note`, `stage`: the current stage or mode, `checkpoint_type: SLIM`, `question`: the note as shown, `options`: the five forms and `skip`); after the reply, a `checkpoint_closed` entry with `answer`: the form chosen or `skip`, and the author's exact words in `user_words`.
@@ -522,7 +522,7 @@ Optional post-research monitoring for new publications in the research area.
 
 ---
 
-## Handoff Protocol: deep-research → academic-paper
+## Handoff Protocol: deep-research-academic → academic-paper
 
 After research is complete, the following materials can be handed off to `academic-paper`:
 
@@ -642,7 +642,7 @@ See `academic-pipeline/SKILL.md` for the complete workflow.
 | `examples/systematic_review.md` | PRISMA-style literature review |
 | `examples/policy_analysis.md` | Applied comparative policy research |
 | `examples/socratic_guided_research.md` | Complete Socratic mode multi-turn dialogue (12 rounds) |
-| `examples/handoff_to_paper.md` | deep-research full mode handoff to academic-paper |
+| `examples/handoff_to_paper.md` | deep-research-academic full mode handoff to academic-paper |
 | `examples/review_mode.md` | Review mode: 3-agent review pipeline for policy recommendation text |
 | `examples/fact_check_mode.md` | Fact-check mode: source verification of HEI claims with per-claim verdicts |
 | `examples/idea_diversity_coverage_gap_advisory.md` | #257 Socratic wording-pattern + lit-review distributional-skew advisories |
@@ -692,12 +692,12 @@ Unified definitions across all agents. ⚠️ IRON RULE: **CRITICAL severity** =
 This skill is domain-agnostic but can be combined with domain-specific skills:
 
 ```
-deep-research + tw-hei-intelligence     -> Evidence-based HEI policy research
-deep-research + report-to-website       -> Interactive research report
-deep-research + podcast-script-generator -> Research podcast
-deep-research + academic-paper          -> Full research-to-publication pipeline
-deep-research (socratic) + academic-paper (plan) -> Guided research + paper planning
-deep-research (systematic-review) + academic-paper -> PRISMA systematic review paper
+deep-research-academic + tw-hei-intelligence     -> Evidence-based HEI policy research
+deep-research-academic + report-to-website       -> Interactive research report
+deep-research-academic + podcast-script-generator -> Research podcast
+deep-research-academic + academic-paper          -> Full research-to-publication pipeline
+deep-research-academic (socratic) + academic-paper (plan) -> Guided research + paper planning
+deep-research-academic (systematic-review) + academic-paper -> PRISMA systematic review paper
 ```
 
 ---

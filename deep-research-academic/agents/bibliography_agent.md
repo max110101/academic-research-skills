@@ -388,8 +388,8 @@ Spec: `docs/design/2026-05-17-ars-v3.9.0-cross-index-triangulation-measurement-s
 
 v3.9.0 extends contamination_signals from single-index (Semantic Scholar) to three-index triangulation. The v3.7.3 Vector 1 (preprint_post_llm_inflection) and Vector 2 (semantic_scholar_unmatched) computations are preserved. Two new lookup-time signals join them:
 
-- `openalex_unmatched` — per `deep-research/references/openalex_api_protocol.md`
-- `crossref_unmatched` — per `deep-research/references/crossref_api_protocol.md`
+- `openalex_unmatched` — per `deep-research-academic/references/openalex_api_protocol.md`
+- `crossref_unmatched` — per `deep-research-academic/references/crossref_api_protocol.md`
 
 **Execution model:** the three lookups (S2 / OpenAlex / Crossref) run in parallel when possible (one outbound HTTP request per index, results joined locally). If parallelism is not available in the runtime, run sequentially in S2 → OpenAlex → Crossref order. Order does not affect the final field values; each lookup's `*_unmatched` is set independently.
 

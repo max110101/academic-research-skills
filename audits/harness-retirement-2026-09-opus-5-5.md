@@ -56,7 +56,7 @@ Card pages for the Opus 5.5 column are in the finding row named in the last colu
 
 | ARS guardrail | Fable 5.1 evidence (prior audit) | Opus 5.5 evidence (this card) | Net |
 |---|---|---|---|
-| Untrusted-material fences: reviewer `<paper_content>` fence and Iron Rule #7; deep-research canonical boundary | general injection posture | pasted-text regression; the same text arriving as a tool result was not acted on | more load-bearing; extended to the revision coach (DM-012, DG-1) |
+| Untrusted-material fences: reviewer `<paper_content>` fence and Iron Rule #7; deep-research-academic canonical boundary | general injection posture | pasted-text regression; the same text arriving as a tool result was not acted on | more load-bearing; extended to the revision coach (DM-012, DG-1) |
 | Checkpoint decision provenance (G-1, R11); committee authority rule (#668) | §6.2.1 fabricated quotation | fabricated user quote relayed to a subagent; accepting unverifiable authorization is a regression | more load-bearing (DM-013) |
 | Required-tool steps backed by receipts | §6.6.1 claims of runs never executed | answers without the required tool or code | unchanged, keep (DM-014) |
 | Read-scope attestations, three-layer citation anchors, claim–source verification | §2.3.3 exaggerated completeness | partial check described as a full read; abstracts over full papers | more load-bearing (DM-015) |
@@ -70,7 +70,7 @@ Card pages for the Opus 5.5 column are in the finding row named in the last colu
 ### By skill
 
 - **`academic-pipeline` (full pipeline).** Long trajectories, multi-agent dispatch, and checkpoint authority meet the two named regressions and the audit's blind spots at once. G-1 and the committee authority rule carry more weight on Opus 5.5 (inference). Per-token cost falls to 40% on Opus 5.5, but a run at `xhigh` spends more output tokens (inference).
-- **`deep-research`.** The most effort-sensitive skill: on Opus 5.5 run it at `high` or above (DM-001). The abstract-over-full-paper failure is what the read-scope attestations and locator-bearing citations exist to expose (DM-015).
+- **`deep-research-academic`.** The most effort-sensitive skill: on Opus 5.5 run it at `high` or above (DM-001). The abstract-over-full-paper failure is what the read-scope attestations and locator-bearing citations exist to expose (DM-015).
 - **`academic-paper`.** Opus 5.5 leads the professional-document benchmarks (GDPval-AA, AA-Briefcase), but its creativity and its honesty under pressure are below Opus 5 (capability table above). The revision claim-drift guards stay as written (DM-016).
 - **`academic-paper-reviewer`.** The `<paper_content>` fence matters more on Opus 5.5, because a manuscript pasted into the chat is user-turn text (DM-012). Reviewer calibration evidence remains model-specific: no Opus 5.5 run exists, and live packages stay `NOT_CALIBRATED`.
 - **Light slash commands.** The 13 commands that pin `model: sonnet` request Sonnet, which resolves to Sonnet 5 on the Anthropic API unless `ANTHROPIC_DEFAULT_SONNET_MODEL` overrides the alias. The session model does not affect them, except where an organization's model allowlist blocks `sonnet`: the command then runs on the session model (docs).
@@ -86,7 +86,7 @@ Rationale: Opus 5.5 is co-current and is the Claude Code default; the card shows
   task-dependent results; Claude Code starts Opus 5.5 at `medium`, where it trails
   Fable 5.1 on both research benchmarks, and it collapses at `low` (pp. 187-188).
 Applied: both models named, with how to select Fable 5.1; an effort paragraph (heavy
-  runs, including a `deep-research` run started in plain language, at `high` or
+  runs, including a `deep-research-academic` run started in plain language, at `high` or
   above on Opus 5.5 without lowering a higher level the user chose; avoid `low`; why
   ARS pins no effort);
   a paragraph recommending files over pasting third-party text (card §6.5.1; the
@@ -217,7 +217,7 @@ Decision: record — unchanged.
 
 ```
 [DM-012] Reviewer `<paper_content>` fence + academic-paper-reviewer/SKILL.md Iron Rule #7;
-  deep-research canonical boundary (source_verification, bibliography) | category 2
+  deep-research-academic canonical boundary (source_verification, bibliography) | category 2
 Rationale: card §6.5.1 — the model "often reasoned that anything in the user's
   message must come from the user"; a manuscript pasted into the chat is exactly that
   channel. A manuscript embedded in a subagent's dispatch prompt plausibly is too,
@@ -324,7 +324,7 @@ Decision: keep.
 
 - Hardcoded model pins in prompt text (`claude-*`, `Opus 4.x`, `Sonnet 4.x`, `Haiku`, `Fable 5`, `Opus 5`, `gpt-*`): **1 hit, a record.** `academic-pipeline/agents/claim_ref_alignment_audit_agent.md:72` names `gpt-6-astra-xhigh` as an example judge identity string (#826), not a routing pin.
 - Sampling and budget overrides (`temperature`, `top_p`, `max_tokens`, `budget_tokens`) in prompt bodies: **0.**
-- Reasoning scaffolds and requests to reproduce hidden reasoning ("think step by step", "show your reasoning", `<thinking>`, "reveal your reasoning", "chain of thought"): **0.** One phrase match, "consolidate internal reasoning" in `deep-research/agents/socratic_mentor_agent.md:126`, describes the mentor's own bookkeeping. This matters more now: the card's distillation classifier blocks attempts to extract hidden reasoning with no fallback (pp. 12-13).
+- Reasoning scaffolds and requests to reproduce hidden reasoning ("think step by step", "show your reasoning", `<thinking>`, "reveal your reasoning", "chain of thought"): **0.** One phrase match, "consolidate internal reasoning" in `deep-research-academic/agents/socratic_mentor_agent.md:126`, describes the mentor's own bookkeeping. This matters more now: the card's distillation classifier blocks attempts to extract hidden reasoning with no fallback (pp. 12-13).
 - `effort:` in command, agent, or skill frontmatter: **0** (see DM-007).
 
 ## Verification

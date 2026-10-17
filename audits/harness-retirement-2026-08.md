@@ -13,7 +13,7 @@
 
 ## Scope manifest
 
-- **deep-research (10):** `research_question_agent`, `research_architect_agent`, `bibliography_agent`, `source_verification_agent`, `timeline_extraction_agent`, `synthesis_agent`, `editor_in_chief_agent`, `ethics_review_agent`, `risk_of_bias_agent`, `meta_analysis_agent`
+- **deep-research-academic (10):** `research_question_agent`, `research_architect_agent`, `bibliography_agent`, `source_verification_agent`, `timeline_extraction_agent`, `synthesis_agent`, `editor_in_chief_agent`, `ethics_review_agent`, `risk_of_bias_agent`, `meta_analysis_agent`
 - **academic-paper (7):** `literature_strategist_agent`, `structure_architect_agent`, `draft_writer_agent`, `citation_compliance_agent`, `abstract_bilingual_agent`, `peer_reviewer_agent`, `formatter_agent`
 - **academic-paper-reviewer (6):** `eic_agent`, `methodology_reviewer_agent`, `domain_reviewer_agent`, `perspective_reviewer_agent`, `devils_advocate_reviewer_agent`, `editorial_synthesizer_agent`
 

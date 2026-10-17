@@ -142,7 +142,7 @@ Leave the 11 `model: sonnet` light-mode commands alone — that's cost routing (
 **Top files** (count of `don't / do not / never / avoid / must not`):
 ```
 41 academic-pipeline/agents/pipeline_orchestrator_agent.md
-33 deep-research/agents/socratic_mentor_agent.md
+33 deep-research-academic/agents/socratic_mentor_agent.md
 28 academic-pipeline/agents/integrity_verification_agent.md
 26 academic-paper/agents/literature_strategist_agent.md
 26 academic-paper-reviewer/agents/editorial_synthesizer_agent.md
@@ -188,11 +188,11 @@ Replace `[MODEL_VERSION]` with the actual model used in this run (e.g., `Opus 4.
 ## Kept as debt (iron rule filtered out — do not resurface next audit)
 
 - `shared/cross_model_verification.md:196,235` — `temperature: 0.1` on GPT/Gemini verifier calls. **Kept**: documented rationale at :261 (deterministic factual task; variance reduction), and it parameterizes non-Claude models.
-- `deep-research/references/{openalex,semantic_scholar,arxiv,crossref}_api_protocol.md` — HTTP-429 backoff/retry. **Kept**: protects external API contracts, not a model scaffold.
+- `deep-research-academic/references/{openalex,semantic_scholar,arxiv,crossref}_api_protocol.md` — HTTP-429 backoff/retry. **Kept**: protects external API contracts, not a model scaffold.
 - R-CIM-D "do NOT invent ids or rename" (draft_writer :591, synthesis :354, report_compiler :341). **Kept**: schema contract (EP-INV-3), definitional not defensive.
 - `visualization_agent.md:441`, `risk_of_bias_agent.md:33`, `pipeline_orchestrator_agent.md:555`, `collaboration_depth_agent.md:75`, `synthesis_agent.md:162`, `literature_corpus_consumers.md:107` — "do not invent X" with positive counterpart in the same clause. **Kept**: negative + positive reinforce each other (Cat 6 counter-example).
 - `commands/*.md` `model: sonnet` ×11 — cost routing, product decision.
-- `deep-research/agents/*` `model: inherit` ×3 — already the target pattern.
+- `deep-research-academic/agents/*` `model: inherit` ×3 — already the target pattern.
 - `tests/fixtures/issue_133_routing/` Opus 4.7 references *inside test fixtures* — records/pins, out of scope (the README threshold definition is F-005, separate).
 
 ## Apply log (2026-06-10 apply turn)

@@ -70,14 +70,14 @@ expose an executable formula by splitting a field. Original source data is prese
 
 ## 4. Handoff to Academic Research Skills
 
-Within Academic Research Skills (ARS), `deep-research` covers research design and the search,
+Within Academic Research Skills (ARS), `deep-research-academic` covers research design and the search,
 and `academic-paper` covers writing; this skill covers the screening in between.
 
 - **Corpus**: `*_literature_corpus.yaml` is a list of `literature_corpus[]` entries in the ARS
   `literature_corpus_entry.schema.json` format (citation key, title, CSL-JSON authors, year,
   source pointer, venue, DOI, tags, provenance `obtained_via: other`,
   `adapter_name: sr-screener`). Paste it under `literature_corpus:` in a Material Passport, or
-  give it to `academic-paper` or `deep-research` as the curated corpus: their literature agents
+  give it to `academic-paper` or `deep-research-academic` as the curated corpus: their literature agents
   then read it first and search only for gaps.
 - **Methods and results**: give `academic-paper` (`full` or `lit-review` mode) the methods
   draft, the PRISMA counts and the excluded-with-reasons list for the Methods, Results and flow

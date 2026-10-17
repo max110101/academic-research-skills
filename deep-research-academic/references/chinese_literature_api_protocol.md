@@ -313,7 +313,7 @@ Tests: `scripts/test_chinese_literature_client.py`, driven entirely by synthetic
 
 ## Cross-references
 
-- Client spec mirror: `deep-research/references/arxiv_api_protocol.md`
+- Client spec mirror: `deep-research-academic/references/arxiv_api_protocol.md`
 - Sibling protocols: `crossref_api_protocol.md`, `openalex_api_protocol.md`, `semantic_scholar_api_protocol.md`
 - Reducer semantics: `scripts/citation_verification_summary.py` (`reduce_lookup_verified`), spec INVARIANT C-V6(a)
 - Transport-fixture discipline: `scripts/fixtures/transport_bodies/README.md`

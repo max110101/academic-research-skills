@@ -1,16 +1,16 @@
-# Handoff Example: deep-research → academic-paper
+# Handoff Example: deep-research-academic → academic-paper
 
-This example demonstrates how deep-research full mode, after completing research, hands off to academic-paper to begin paper writing.
+This example demonstrates how deep-research-academic full mode, after completing research, hands off to academic-paper to begin paper writing.
 
 ---
 
 ## Scenario Setup
 
-The user has completed deep-research full mode on the topic "AI-Assisted Quality Assurance in Higher Education: A Comparative Analysis of Implementation Strategies in East Asian Universities." Below is a summary of the research outputs.
+The user has completed deep-research-academic full mode on the topic "AI-Assisted Quality Assurance in Higher Education: A Comparative Analysis of Implementation Strategies in East Asian Universities." Below is a summary of the research outputs.
 
 ---
 
-## deep-research Output Summary
+## deep-research-academic Output Summary
 
 ### 1. Research Question Brief (from research_question_agent)
 
@@ -133,7 +133,7 @@ manuscript/preregistration pair is not checked; it is not evidence of agreement.
 
 ## Handoff Instruction
 
-After completing deep-research, the user inputs:
+After completing deep-research-academic, the user inputs:
 
 ```
 Now help me write a paper based on this research
@@ -149,30 +149,30 @@ Now help me write a paper based on this research
 Scanning available materials...
 
 [DETECTED] Research Question Brief
-  - Source: deep-research / research_question_agent
+  - Source: deep-research-academic / research_question_agent
   - Status: Complete (FINER 4.6/5)
   - Action: SKIP academic-paper Phase 1 (topic scoping)
 
 [DETECTED] Methodology Blueprint
-  - Source: deep-research / research_architect_agent
+  - Source: deep-research-academic / research_architect_agent
   - Status: Complete (pragmatist QCA + document analysis)
   - Action: SKIP academic-paper Phase 2 (methodology design)
   - Note: Will integrate into Method section directly
 
 [DETECTED] Annotated Bibliography (18 sources, APA 7.0)
-  - Source: deep-research / bibliography_agent
+  - Source: deep-research-academic / bibliography_agent
   - Status: Complete, quality-screened
   - Action: SKIP academic-paper literature search
   - Note: Will use as foundation for Literature Review section
 
 [DETECTED] Synthesis Report
-  - Source: deep-research / synthesis_agent
+  - Source: deep-research-academic / synthesis_agent
   - Status: Complete (3 core findings + 1 contradiction + 2 gaps)
   - Action: SKIP academic-paper analysis phase
   - Note: Will structure Findings and Discussion sections around synthesis
 
 [DETECTED] Preregistration artifact sidecar
-  - Source: deep-research dispatching layer
+  - Source: deep-research-academic dispatching layer
   - Status: not_provided (explicit unavailable receipt; no companion)
   - Action: VALIDATE and CARRY sidecar byte-for-byte
   - Advisory effect: manuscript/preregistration pair remains NOT CHECKED
@@ -214,7 +214,7 @@ manuscript.
 Step 1: STRUCTURAL MAPPING
   [outline_agent]
   - Input: RQ Brief + Methodology Blueprint + Synthesis Report
-  - Output: Complete paper outline, each section tagged with corresponding deep-research materials
+  - Output: Complete paper outline, each section tagged with corresponding deep-research-academic materials
   - Output example:
 
     I. Introduction
@@ -267,7 +267,7 @@ Step 3: DISCUSSION + BOOKENDS
   [discussion_writer_agent] → Discussion
     - Original discourse: dialogue between findings and theory
     - Does not repeat Findings; instead explains "why"
-    - Integrates deep-research Knowledge Gaps as Future Research
+    - Integrates deep-research-academic Knowledge Gaps as Future Research
 
   [bookend_agent] → Introduction + Conclusion
     - Introduction: from macro context to specific RQ
@@ -293,7 +293,7 @@ Step 5: SELF-REVIEW
 
 **academic-paper's Opening Message**:
 
-> I've read your complete outputs from the deep-research stage, including:
+> I've read your complete outputs from the deep-research-academic stage, including:
 > - Research Question Brief (FINER 4.6/5)
 > - Methodology Blueprint (QCA + document analysis)
 > - Annotated Bibliography (18 quality-screened sources)
@@ -312,7 +312,7 @@ Step 5: SELF-REVIEW
 
 ## Notes
 
-1. **Not copy-paste**: academic-paper does not directly copy deep-research outputs, but transforms them into the tone and format of an academic paper
-2. **May discover new issues**: During the writing process, academic-paper agents may discover points missed by deep-research and will proactively supplement them
+1. **Not copy-paste**: academic-paper does not directly copy deep-research-academic outputs, but transforms them into the tone and format of an academic paper
+2. **May discover new issues**: During the writing process, academic-paper agents may discover points missed by deep-research-academic and will proactively supplement them
 3. **Still requires user confirmation**: Target journal, language preference, specific formatting requirements still require user input
 4. **Review recommendation auto-connects**: After paper completion, the user can continue with `academic-paper-reviewer` for formal review

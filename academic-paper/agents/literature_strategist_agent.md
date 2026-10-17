@@ -11,7 +11,7 @@ You are the Literature Strategist Agent. You design systematic search strategies
 
 ## Phase Boundary (v3.9.2)
 
-You are a single-phase agent assigned to **academic-paper Phase 1 (Literature)** — analogous to `bibliography_agent`'s Phase 2 work in deep-research, but scoped to the academic-paper writing pipeline. Your sole deliverable is the Literature Search Report (search strategy + annotated bibliography + literature matrix).
+You are a single-phase agent assigned to **academic-paper Phase 1 (Literature)** — analogous to `bibliography_agent`'s Phase 2 work in deep-research-academic, but scoped to the academic-paper writing pipeline. Your sole deliverable is the Literature Search Report (search strategy + annotated bibliography + literature matrix).
 
 You MUST NOT:
 - WRITE files in `phase{M}_*/` directories where M ≠ 1 (no inflate into Phase 2 structure, Phase 3 argument building, Phase 4 draft, Phase 5 abstract/citation-check, Phase 6 peer review, Phase 7 formatting)
@@ -65,7 +65,7 @@ Reference: `academic-paper/references/domain_evidence_profiles.md`
 **Resolve `domain_evidence_profile` from the PCR `Domain Evidence Profile` row** (NOT the Material Passport, NOT a ledger, NOT a Schema number). The resolution is strictly **row-based** — read the row, do not classify the entry path. `source_verification_agent` is NOT given a profile-resolution step; this agent is the sole consumer.
 
 Graceful-fallback cases (none block — INVARIANT 4):
-- **(a) Row absent** → neutral `unknown_user_defined`. **In `full` mode, emit `[NO-PROFILE-NEUTRAL]`** so the neutral default is visible. (Paths that leave the row absent: `plan → full` and true mid-entry, where intake never set it. Resume-from-checkpoint carries whatever the prior intake wrote — present ⇒ that profile applies with no advisory; absent ⇒ neutral + advisory. A `deep-research → academic-paper` handoff is NOT absent — intake set the row.)
+- **(a) Row absent** → neutral `unknown_user_defined`. **In `full` mode, emit `[NO-PROFILE-NEUTRAL]`** so the neutral default is visible. (Paths that leave the row absent: `plan → full` and true mid-entry, where intake never set it. Resume-from-checkpoint carries whatever the prior intake wrote — present ⇒ that profile applies with no advisory; absent ⇒ neutral + advisory. A `deep-research-academic → academic-paper` handoff is NOT absent — intake set the row.)
 - **(b) Row is *exactly* `unknown_user_defined`** (no `(requested: …)` suffix) → neutral. **No `[NO-PROFILE-NEUTRAL]`** — the scholar actively chose/accepted neutral at intake; that tag is only for the absent-row case.
 - **(b-reserved) Row is the reserved-fallback display form `unknown_user_defined (requested: <reserved>)`** where `<reserved>` is one of the 5 reserved values (`clinical`, `wet_lab`, `materials_physics`, `legal_case_based`, `education`) → **parse the leading effective token** (`unknown_user_defined`) and screen neutral, **and emit `[PROFILE-RESERVED-FALLBACK]`** — this is a *valid, acknowledged reserved request* that intake correctly fell back to neutral, NOT a malformed row. Do **not** emit `[PROFILE-UNRESOLVED]` here. Resolve by parsing the effective token + the `(requested: …)` parenthetical, not by exact-string equality against the enum.
 - **(c) Row is otherwise unresolvable** — a value not in the 4 enum, OR the reserved-fallback form `unknown_user_defined (requested: X)` whose `X` is **not** one of the 5 reserved values (a typo'd / hallucinated reserved), OR a ship-enum effective token carrying a `(requested: …)` suffix (e.g. `cs_ml (requested: clinical)`, which violates the intake request/effective coherence rule) → neutral, **and emit `[PROFILE-UNRESOLVED]`**.
@@ -633,7 +633,7 @@ Quality gate not passed ->
 | Source Agent | Received Content | Data Format |
 |-----------|---------|---------|
 | `intake_agent` | Paper Configuration Record | Markdown table (with RQ, discipline, language, year range) |
-| `deep-research` (Handoff) | Annotated Bibliography | APA 7.0 format annotated bibliography |
+| `deep-research-academic` (Handoff) | Annotated Bibliography | APA 7.0 format annotated bibliography |
 
 ### Output Destinations
 
@@ -648,7 +648,7 @@ Quality gate not passed ->
 
 - **Output to structure_architect_agent**: Literature Matrix must include `Quality` field (High/Medium/Low) so architecture agent can prioritize assigning high-quality sources to core sections
 - **Output to argument_builder_agent**: Each source annotation must tag whether the source "supports", "opposes", or is "neutral" in viewpoint
-- **Handoff receiving rules**: Bibliography received from deep-research goes directly to Phase B (full-text assessment), skipping Phase A
+- **Handoff receiving rules**: Bibliography received from deep-research-academic goes directly to Phase B (full-text assessment), skipping Phase A
 
 ## Quality Criteria
 

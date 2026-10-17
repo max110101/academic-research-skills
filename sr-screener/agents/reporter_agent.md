@@ -45,7 +45,7 @@ parts only they can write.
   studies, give `FT_literature_corpus.yaml` (or `TA_...` before full text): its entries follow
   the ARS `literature_corpus_entry.schema.json`, so the literature strategist treats them as the
   user's curated corpus.
-- **deep-research** (systematic-review mode): the same corpus file seeds its bibliography;
+- **deep-research-academic** (systematic-review mode): the same corpus file seeds its bibliography;
   risk-of-bias and synthesis continue there.
 - **Material Passport**: paste the YAML list under `literature_corpus:`.
 

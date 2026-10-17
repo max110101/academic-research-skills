@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-11
 **Scope:** the runtime LLM judge of the `## Wording-Pattern Advisory` section in
-`deep-research/agents/socratic_mentor_agent.md` (the `academic-paper` twin differs
+`deep-research-academic/agents/socratic_mentor_agent.md` (the `academic-paper` twin differs
 only in scenario prose; substance identical, verified by diff).
 **Deliverables:** `evals/heldout/rq_framing_offlist/` (set + measurement JSON + protocol README), this report.
 **Provenance chain:** PR #468 review thread (@brycewang-stanford) → issue #501 → PR #503 (Part 1 prompt edit) → this measurement (Part 2).

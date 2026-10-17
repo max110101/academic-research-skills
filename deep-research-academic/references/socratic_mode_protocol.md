@@ -86,7 +86,7 @@ User: "Guide my research on [topic]"
   and suggest continued questioning, `lit-review`, or an explicit switch to
   `full` mode (see Failure Paths F1/F6); do not generate candidates as a fallback
 - When the dialogue ends is decided by
-  `deep-research/agents/socratic_mentor_agent.md` § Auto-End Conditions
+  `deep-research-academic/agents/socratic_mentor_agent.md` § Auto-End Conditions
   (Precise): round caps, stagnation thresholds, and convergence live there.
   This file states no round count of its own
 - If user requests direct answers -> gently decline and explain the value of

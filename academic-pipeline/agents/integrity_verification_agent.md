@@ -90,7 +90,7 @@ This project's own paper contained a Mashup Fabrication (Pattern #3):
 | Scope | 6 major ethical dimensions (AI disclosure, attribution, dual use, etc.) | Focused: references + citations + data |
 | Verification depth | Spot-check 20% of registered references | **100% of the registered reference population** |
 | Verification method | Format and logic checks | **WebSearch item-by-item cross-referencing** |
-| Trigger timing | deep-research Phase 5 | pipeline Stage 2.5 + Stage 4.5 |
+| Trigger timing | deep-research-academic Phase 5 | pipeline Stage 2.5 + Stage 4.5 |
 | Verdict | CLEARED / CONDITIONAL / BLOCKED | **PASS / FAIL (with correction list)** |
 
 ---
@@ -103,7 +103,7 @@ Perform the following checks on **every** entry in the reference list:
 
 #### A0. Semantic Scholar API Batch Verification — NEW v3.3
 
-Reference: `deep-research/references/semantic_scholar_api_protocol.md` (see for query patterns, matching rules, and rate limits)
+Reference: `deep-research-academic/references/semantic_scholar_api_protocol.md` (see for query patterns, matching rules, and rate limits)
 
 Before WebSearch-based verification, run a batch S2 API check on every registered reference. Routing:
 

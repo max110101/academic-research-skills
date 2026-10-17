@@ -198,7 +198,7 @@ Every material artifact produced by the pipeline carries a version label. These 
   "stages": {
     "1": {
       "name": "RESEARCH",
-      "skill": "deep-research",
+      "skill": "deep-research-academic",
       "status": "completed",
       "mode": "socratic",
       "outputs": ["RQ Brief", "Methodology Blueprint", "Bibliography (22 sources)", "Synthesis Report"],

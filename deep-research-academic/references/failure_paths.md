@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document lists all failure scenarios that may be encountered across all modes of the deep-research skill, along with their detection conditions, user notification messages, handling steps, and recovery paths. The purpose is to ensure every failure scenario has a clear handling strategy, preventing users from reaching a dead end.
+This document lists all failure scenarios that may be encountered across all modes of the deep-research-academic skill, along with their detection conditions, user notification messages, handling steps, and recovery paths. The purpose is to ensure every failure scenario has a clear handling strategy, preventing users from reaching a dead end.
 
 ---
 
@@ -206,7 +206,7 @@ This document lists all failure scenarios that may be encountered across all mod
 1. Compile currently extracted INSIGHTs
 2. Summarize the directions the user has expressed, in the order they were expressed and in the user's wording. Do not rank them, do not pre-fill option (A) with a system pick, and do not FINER-score them; the choice among them is the user's
 3. Provide 3 options (continue on a user-chosen direction / switch mode with the visible exit marker / pause)
-4. If the user chooses to continue and the dialogue still does not converge, `deep-research/agents/socratic_mentor_agent.md` § Auto-End Conditions (Precise) decides when the dialogue ends. That section is the single authority for round caps and stagnation thresholds; this file states no round count of its own
+4. If the user chooses to continue and the dialogue still does not converge, `deep-research-academic/agents/socratic_mentor_agent.md` § Auto-End Conditions (Precise) decides when the dialogue ends. That section is the single authority for round caps and stagnation thresholds; this file states no round count of its own
 
 **Recovery Paths**:
 - Continue with focus → the user has chosen the direction; keep the Socratic questioning on it without limiting what the user may raise next

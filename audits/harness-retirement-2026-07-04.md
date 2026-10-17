@@ -14,7 +14,7 @@
 ### Scanned manifest (the 17 + 2)
 
 - **academic-pipeline (5):** `pipeline_orchestrator`, `integrity_verification`, `state_tracker`, `claim_ref_alignment_audit`, `collaboration_depth`
-- **deep-research (5):** `socratic_mentor`, `report_compiler`, `monitoring`, `devils_advocate`, `timeline_extraction`
+- **deep-research-academic (5):** `socratic_mentor`, `report_compiler`, `monitoring`, `devils_advocate`, `timeline_extraction`
 - **academic-paper (5):** `socratic_mentor`, `visualization`, `intake`, `revision_coach`, `argument_builder`
 - **academic-paper-reviewer (1):** `field_analyst` · **shared (1):** `compliance_agent`
 - **commands (2):** `ars-3w.md`, `ars-rebuttal-audit.md`
@@ -32,8 +32,8 @@
   | 5 — Defensive scaffolding / duplication / stale constants | 6 | B2-F01 (**P1**), B2-F02, B3-F02 (**P1**), B3-F03, B1-F02, B3-F04 |
   | 2, 3, 6 | 0 | — (Cat 6 resolved via the F-007 closure below) |
 
-- **Dominant disease of this pass: duplication-drift.** Both `socratic_mentor` agents wrote their convergence/auto-end rules twice (deep-research: B2-F01/F02; academic-paper: B3-F02), and both duplicated copies have **already drifted into live self-contradictions** (15-vs-30 round threshold; a stale 10/15-round constant that bypasses the v3.0 exploratory protection layer). The orchestrator's user-response dispatch is written three times with one row missing from the authoritative table (B1-F02). These are not just token weight — the duplicates are actively contradicting the current rules.
-- **2026-06-10 F-007 (deferred negative-framing reframe) is hereby CLOSED as "verified, no rewrite needed."** All three top-density files were re-examined sentence-by-sentence: `pipeline_orchestrator` (57 hits ≈ 31 rule sites), `integrity_verification` (29 ≈ 21 sites), deep-research `socratic_mentor` (44/44) — **zero safely-reframeable negatives**. The density lives in gate/contract semantics, anti-sycophancy machinery, flag-gated product boundaries, and incident-born patches (several lint-pinned verbatim). The correct disposition is *reclassified as contract*, not rewritten. The count growth since 2026-06 (33→44 etc.) comes from new flag-gated contract blocks, not from decayed scaffolding.
+- **Dominant disease of this pass: duplication-drift.** Both `socratic_mentor` agents wrote their convergence/auto-end rules twice (deep-research-academic: B2-F01/F02; academic-paper: B3-F02), and both duplicated copies have **already drifted into live self-contradictions** (15-vs-30 round threshold; a stale 10/15-round constant that bypasses the v3.0 exploratory protection layer). The orchestrator's user-response dispatch is written three times with one row missing from the authoritative table (B1-F02). These are not just token weight — the duplicates are actively contradicting the current rules.
+- **2026-06-10 F-007 (deferred negative-framing reframe) is hereby CLOSED as "verified, no rewrite needed."** All three top-density files were re-examined sentence-by-sentence: `pipeline_orchestrator` (57 hits ≈ 31 rule sites), `integrity_verification` (29 ≈ 21 sites), deep-research-academic `socratic_mentor` (44/44) — **zero safely-reframeable negatives**. The density lives in gate/contract semantics, anti-sycophancy machinery, flag-gated product boundaries, and incident-born patches (several lint-pinned verbatim). The correct disposition is *reclassified as contract*, not rewritten. The count growth since 2026-06 (33→44 etc.) comes from new flag-gated contract blocks, not from decayed scaffolding.
 - **Suggested batch order (post-challenge):** B2-F01 + B3-F02 first (the two **P1** live contradictions; each needs one user threshold decision) → B4-F02 (mechanical, challenge-amended scope) → B4-F01 (one sentence × 29 surfaces, lint-safe wording verified) → B2-F02 + B1-F02 (dedup/merge) → B3-F01/B3-F03/B1-F01/B1-F03/B2-F03/B4-F03 (few-shot & narration trims) → B3-F04 (weakest, reject defensible).
 
 ## Carry-forward re-check verdicts
@@ -53,7 +53,7 @@ The 2026-07 keep-reason ("enforcement is prompt-level-only; deterministic hook d
 
 ### [B4-F01] 23 agent files (`## Phase Boundary` blocks) + 2 mirrors + 4 `SKILL.md` — stale enforcement status sentence — Cat 1-type stale pin · P2 · confidence high
 
-**Excerpt** (`deep-research/agents/synthesis_agent.md:27`, same-shape sentence at all 29 surfaces)
+**Excerpt** (`deep-research-academic/agents/synthesis_agent.md:27`, same-shape sentence at all 29 surfaces)
 ```
 **Enforcement (v3.9.2):** prompt-level only. Advisory verifier (scripts/check_pipeline_integrity.py)
 can detect violations post-hoc. Deterministic PreToolUse hook deferred to v3.10 active conductor (#134).
@@ -84,7 +84,7 @@ export ARS_CROSS_MODEL="gpt-5.4-pro"      # Best reasoning
 
 ---
 
-### [B2-F01] `deep-research/agents/socratic_mentor_agent.md:613,642` — Cat 5 (stale constants, pre-v3.0 residue) · **P1** (challenge-upgraded; auditor concurs) · confidence high
+### [B2-F01] `deep-research-academic/agents/socratic_mentor_agent.md:613,642` — Cat 5 (stale constants, pre-v3.0 residue) · **P1** (challenge-upgraded; auditor concurs) · confidence high
 
 **Excerpt**
 ```
@@ -100,7 +100,7 @@ L642: At the end of the dialogue (Layer 5 completed or 15-round limit reached), 
 
 ---
 
-### [B2-F02] `deep-research/agents/socratic_mentor_agent.md:545-551 vs 594-614` (also 570 vs 598) — Cat 5 (repetition-as-reinforcement) · P2 · confidence medium
+### [B2-F02] `deep-research-academic/agents/socratic_mentor_agent.md:545-551 vs 594-614` (also 570 vs 598) — Cat 5 (repetition-as-reinforcement) · P2 · confidence medium
 
 **Excerpt**
 ```
@@ -221,7 +221,7 @@ Example rendering (no `pending_decision`, no override):
 
 ---
 
-### [B2-F03] `deep-research/agents/report_compiler_agent.md:142-147` — Cat 4 (basic citation-format few-shot) · P2 · confidence medium
+### [B2-F03] `deep-research-academic/agents/report_compiler_agent.md:142-147` — Cat 4 (basic citation-format few-shot) · P2 · confidence medium
 
 **Excerpt**
 ```
@@ -275,10 +275,10 @@ Higher-education QA domain; Taiwan private-university domain)
 
 Condensed; each batch verified the full kept inventory. Highlights new to this pass (prior-audit kept items re-confirmed, not restated):
 
-- **F-007 closure inventory:** all negative-framing sites in `pipeline_orchestrator` (31 rule sites: gate/fail-closed family incl. lint-pinned L680-681 "can NEVER be skipped"; reset-boundary lock contracts; advisory-never-blocks; consent/privacy; negative+positive twin pairs), `integrity_verification` (21 sites: incident-grounded anti-hallucination contracts — the Lin-et-al. mashup case study is documented in-file; fail-closed precedence; consent gates), and deep-research `socratic_mentor` (44/44: anti-sycophancy family incl. incident-born premature-convergence rules; Kong #257/#393 L2 verb-test boundaries; Reading/Adjacent Probe blocks — both **lint-pinned** by `test_reading_probe_lint.py` / `test_adjacent_framing_probe_lint.py`; SCR invisibility; INSIGHT definitional exclusions; Health Indicator). **KEEP, reclassified as contract.**
+- **F-007 closure inventory:** all negative-framing sites in `pipeline_orchestrator` (31 rule sites: gate/fail-closed family incl. lint-pinned L680-681 "can NEVER be skipped"; reset-boundary lock contracts; advisory-never-blocks; consent/privacy; negative+positive twin pairs), `integrity_verification` (21 sites: incident-grounded anti-hallucination contracts — the Lin-et-al. mashup case study is documented in-file; fail-closed precedence; consent gates), and deep-research-academic `socratic_mentor` (44/44: anti-sycophancy family incl. incident-born premature-convergence rules; Kong #257/#393 L2 verb-test boundaries; Reading/Adjacent Probe blocks — both **lint-pinned** by `test_reading_probe_lint.py` / `test_adjacent_framing_probe_lint.py`; SCR invisibility; INSIGHT definitional exclusions; Health Indicator). **KEEP, reclassified as contract.**
 - `claim_ref_alignment_audit_agent` — entire file clean (v3.8-era, schema/lint-bound throughout: JUDGE-PROMPT-CANONICAL is lint-hashed; 38 invariants pinned). Judge default `gpt-5.5-xhigh` verified current.
 - `intake_agent` — clean; the most lint-anchored file in the batch (3 lints parse its prose: #392/#439/domain-evidence). Its "NEVER fill a field from memory of the journal" family = laundering-guard provenance contracts, not generic anti-hallucination.
-- `argument_builder`, `monitoring`, `devils_advocate` (deep-research), `compliance_agent`, both new commands — clean; kept inventories in batch records. `compliance_agent:113/118` F-008 annotation confirmed intact (stays deferred per 2026-06-10). (`timeline_extraction` carries a B4-F01 instance; `field_analyst` carries the disputed B4-F03.)
+- `argument_builder`, `monitoring`, `devils_advocate` (deep-research-academic), `compliance_agent`, both new commands — clean; kept inventories in batch records. `compliance_agent:113/118` F-008 annotation confirmed intact (stays deferred per 2026-06-10). (`timeline_extraction` carries a B4-F01 instance; `field_analyst` carries the disputed B4-F03.)
 - `argument_builder_agent.md:36-49, 63-69` (sub-argument tree + counter-argument table) — **challenged by codex, challenge REJECTED**: the counter-argument table's 3 rows each demonstrate a *distinct* rebuttal strategy (acknowledge+limit / safeguards / concede-short-term) = the Cat 4 "examples as spec" counter-example verbatim; the tree + CER table are single canonical examples, already at the rubric's 0-1 target density. KEEP stands.
 - `visualization_agent` Steps 6.5/6.6, palette/rcParams config constants, Chart Type Decision Logic (house policy), Edge Cases tables — KEEP.
 - academic-paper `socratic_mentor` Wording-Pattern Advisory (Kong #257) — KEEP + **lint-pinned** (`test_check_rq_framing_patterns.py:66-78` asserts heading, marker, WP01-20 IDs, and literal sentences). Any same-file edit must keep clear of L27-64.
@@ -289,7 +289,7 @@ Condensed; each batch verified the full kept inventory. Highlights new to this p
 | Batch | Files | Lines read | Findings | Clean files |
 |---|---|---:|---:|---|
 | B1 academic-pipeline | 5 | 2,737 (all end-to-end) | 3 | integrity_verification, claim_ref_alignment_audit, collaboration_depth |
-| B2 deep-research | 5 | 1,572 | 3 | monitoring, devils_advocate, timeline_extraction |
+| B2 deep-research-academic | 5 | 1,572 | 3 | monitoring, devils_advocate, timeline_extraction |
 | B3 academic-paper | 5 | 1,935 | 4 | intake, argument_builder |
 | B4 residual + re-checks | 4 (+ guard spec, hooks, lints, 23-file roster greps) | ~530 + evidence reads | 2 | field_analyst, compliance_agent, both commands |
 

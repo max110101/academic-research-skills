@@ -2,7 +2,7 @@
 
 ## Overview
 
-deep-research provides 8 modes suited to different research stages and needs. This guide helps users select the most appropriate mode.
+deep-research-academic provides 8 modes suited to different research stages and needs. This guide helps users select the most appropriate mode.
 
 ---
 
@@ -244,9 +244,9 @@ review → full                Need to re-research after review
 systematic-review → academic-paper  Write up systematic review as a paper
 ```
 
-### deep-research to academic-paper Mode Mapping
+### deep-research-academic to academic-paper Mode Mapping
 
-| deep-research Mode | Output | Maps to academic-paper Mode | Description |
+| deep-research-academic Mode | Output | Maps to academic-paper Mode | Description |
 |-------------------|------|--------------------------|------|
 | `full` | Complete research report | `full` or `revision` | Research complete, proceed to paper writing |
 | `socratic` | Research Plan Summary | `plan` | Research direction determined, plan paper structure |
@@ -256,9 +256,9 @@ systematic-review → academic-paper  Write up systematic review as a paper
 | `fact-check` | Verification report | Does not map | Fact-checking concluded |
 | `systematic-review` | PRISMA report + forest plots + GRADE table | `full` (systematic review paper) | Systematic review complete, write as a journal article |
 
-### deep-research vs academic-paper-reviewer Mode Mapping
+### deep-research-academic vs academic-paper-reviewer Mode Mapping
 
-| deep-research `review` mode | academic-paper-reviewer |
+| deep-research-academic `review` mode | academic-paper-reviewer |
 |------------------------------|------------------------|
 | 3 agents (Editor + DA + Ethics) | Dedicated paper review skill |
 | Suitable for quality review of any text | Designed specifically for academic paper review process |
@@ -270,7 +270,7 @@ systematic-review → academic-paper  Write up systematic review as a paper
 ## Complete Academic Research Pipeline
 
 ```
-Step 1: deep-research (socratic/full)
+Step 1: deep-research-academic (socratic/full)
           ↓ Research Plan / Full Report
 Step 2: academic-paper (plan/full)
           ↓ Paper draft
@@ -313,7 +313,7 @@ Rules for switching between modes mid-research. Not all transitions are safe.
 - **Quality Delta**: Fact-check is binary (true/false/mixed); full mode produces nuanced analysis
 
 ### Transition: lit-review → systematic-review
-- **When**: The author chooses a systematic review, for example after the review-form note (`deep-research/SKILL.md` § Review-form note, #921) or because their target journal requires PRISMA compliance. ARS does not start this transition because the topic seems to warrant it
+- **When**: The author chooses a systematic review, for example after the review-form note (`deep-research-academic/SKILL.md` § Review-form note, #921) or because their target journal requires PRISMA compliance. ARS does not start this transition because the topic seems to warrant it
 - **Reusable**: Initial keyword strategy, some identified sources (need re-screening)
 - **Must Redo**: Protocol registration, formal inclusion/exclusion criteria, dual screening, risk of bias assessment, meta-analysis feasibility assessment
 - **Quality Delta**: systematic-review requires protocol, RoB assessment, GRADE; lit-review has none of these

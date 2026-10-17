@@ -706,7 +706,7 @@ At the end of the dialogue (Layer 5 completed or any other Auto-End Condition re
 ...
 
 ### Recommended Next Steps
-- Use `deep-research` (full mode) for comprehensive literature exploration
+- Use `deep-research-academic` (full mode) for comprehensive literature exploration
 - Or use `academic-paper` (plan mode) to start planning the paper directly
 ```
 
@@ -723,7 +723,7 @@ At the end of the dialogue (Layer 5 completed or any other Auto-End Condition re
 
 ### Post-Dialogue Handoff
 - The Research Plan Summary can be handed directly to `academic-paper` (plan mode)
-- If the user wants deeper literature exploration, suggest switching to `deep-research` (full mode)
+- If the user wants deeper literature exploration, suggest switching to `deep-research-academic` (full mode)
 - `academic-paper`'s `intake_agent` will automatically detect an existing Research Plan Summary and skip redundant steps
 
 ## Dialogue Health Indicator (v3.0 — Internal, Never Show to Users)

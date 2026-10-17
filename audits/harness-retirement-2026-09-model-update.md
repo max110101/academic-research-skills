@@ -101,7 +101,7 @@ Decision: keep; annotate here so it does not resurface.
 ```
 
 ```
-[MU-007] deep-research/agents/socratic_mentor_agent.md:758 | category 3-like (numeric cap)
+[MU-007] deep-research-academic/agents/socratic_mentor_agent.md:758 | category 3-like (numeric cap)
 Excerpt: "Keep responses under 400 words — past that, you're lecturing"
 Rationale for flagging: reads like a capability-era length cap.
 Rationale for keeping: Fable 5.1 §8.4 records that at higher effort the model adds

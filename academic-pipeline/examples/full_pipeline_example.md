@@ -48,9 +48,9 @@ You can adjust any stage's mode at any time. Ready to begin?
 ### Stage 1: RESEARCH (socratic mode)
 
 ```
-Entering Stage 1 (RESEARCH) -- using deep-research socratic mode
+Entering Stage 1 (RESEARCH) -- using deep-research-academic socratic mode
 
-Loading deep-research SKILL.md...
+Loading deep-research-academic SKILL.md...
 Launching socratic_mentor_agent...
 ```
 
@@ -149,7 +149,7 @@ Entering Stage 2 (WRITE) -- using academic-paper plan mode
 
 Loading academic-paper SKILL.md...
 handoff materials: RQ Brief + Bibliography + Synthesis
-intake_agent auto-detected deep-research output, skipping redundant Phase 0 questions
+intake_agent auto-detected deep-research-academic output, skipping redundant Phase 0 questions
 Launching socratic_mentor_agent (plan mode)...
 ```
 

@@ -29,7 +29,7 @@ Dual-track 補了第四條：本盤點初稿自己也犯了「AI 對自寫物 an
 | 階段 | 覆蓋 | 深度 | 判定 |
 |---|---|---|---|
 | grant/計畫申請 | funding_statement_guide（formatter reference）為止 | 近零 | **未拍板留白**：F-13 |
-| RQ 孵化 | deep-research `socratic`（5-layer）+ FINER guidance-tool 對話 + #257 wording advisory | 完整對話工作流；Layer 1/5 已含 impact 探問（dual-track 修正，見 F-4 撤回紀錄） | 蓋到 |
+| RQ 孵化 | deep-research-academic `socratic`（5-layer）+ FINER guidance-tool 對話 + #257 wording advisory | 完整對話工作流；Layer 1/5 已含 impact 探問（dual-track 修正，見 F-4 撤回紀錄） | 蓋到 |
 | 文獻搜尋/篩選 | `lit-review` / `systematic-review`（PRISMA）+ literature_corpus + 四索引 citation gate | 全 suite 最厚 | 蓋到；灰色文獻低覆蓋（F-3） |
 | 方法設計 | research_architect（Methodology Blueprint）；preregistration 僅 reference | Blueprint 為止 | 蓋到 |
 | 實驗/資料蒐集 | 無。#260 只做 scholar 宣告的 provenance intake | 僅 intake/audit | **non-goal（正確）**：Kong §3.3 rejected；companion experiment-agent 接手 |

@@ -1,15 +1,15 @@
 ---
 name: academic-pipeline
-description: "Orchestrator for the full academic research pipeline: research -> write -> integrity check -> review -> revise -> re-review -> re-revise -> final integrity check -> finalize. Coordinates deep-research, academic-paper, and academic-paper-reviewer into a seamless 10-stage workflow with mandatory, coverage-bounded integrity checks, two-stage peer review, and auditable quality-assurance artifacts. Triggers on: academic pipeline, research to paper, full paper workflow, paper pipeline, end-to-end paper, research-to-publication, complete paper workflow, 연구부터 논문까지, 연구 주제 설정부터 논문 완성까지, 논문 전체 워크플로, flujo de trabajo académico, investigación a artículo, flujo completo de artículo, pipeline de investigación completa, publicación de investigación, flujo de trabajo completo del artículo."
+description: "Orchestrator for the full academic research pipeline: research -> write -> integrity check -> review -> revise -> re-review -> re-revise -> final integrity check -> finalize. Coordinates deep-research-academic, academic-paper, and academic-paper-reviewer into a seamless 10-stage workflow with mandatory, coverage-bounded integrity checks, two-stage peer review, and auditable quality-assurance artifacts. Triggers on: academic pipeline, research to paper, full paper workflow, paper pipeline, end-to-end paper, research-to-publication, complete paper workflow, 연구부터 논문까지, 연구 주제 설정부터 논문 완성까지, 논문 전체 워크플로, flujo de trabajo académico, investigación a artículo, flujo completo de artículo, pipeline de investigación completa, publicación de investigación, flujo de trabajo completo del artículo."
 metadata:
   version: "3.23.1"
   last_updated: "2026-10-16"
-  depends_on: "deep-research, academic-paper, academic-paper-reviewer"
+  depends_on: "deep-research-academic, academic-paper, academic-paper-reviewer"
   status: active
   data_access_level: raw
   task_type: open-ended
   related_skills:
-    - deep-research
+    - deep-research-academic
     - academic-paper
     - academic-paper-reviewer
 ---
@@ -36,7 +36,7 @@ Otherwise, classify the user's input:
 3. **Ambiguous intent, no materials** — user provides no artifacts and no clear request:
    → Clarify per `shared/references/intent_clarification_protocol.md`.
 
-**Screening boundary (sr-screener):** a request to screen records the user already has (database exports, pasted abstracts, full-text PDFs) against a review's eligibility criteria, or to build a screening protocol, pilot the screening, adjudicate screening conflicts, audit exclusions, or report the selection counts, routes to `sr-screener`. A request to write a literature review, or to run a systematic review, meta-analysis, or PRISMA report, does not route to `sr-screener`. Screening starts only when the user asks for it: `deep-research` `systematic-review` mode may mention `sr-screener`, but never hands over to it automatically.
+**Screening boundary (sr-screener):** a request to screen records the user already has (database exports, pasted abstracts, full-text PDFs) against a review's eligibility criteria, or to build a screening protocol, pilot the screening, adjudicate screening conflicts, audit exclusions, or report the selection counts, routes to `sr-screener`. A request to write a literature review, or to run a systematic review, meta-analysis, or PRISMA report, does not route to `sr-screener`. Screening starts only when the user asks for it: `deep-research-academic` `systematic-review` mode may mention `sr-screener`, but never hands over to it automatically.
 
 **Anti-pattern (caused #133):** Receiving ambiguous cross-phase materials and silently auto-routing to a single-phase agent based on which phase the materials "look closest to." This bypasses orchestrator-level reconciliation and lets the subagent inherit the full ambiguity without independent oversight.
 <!-- routing-core:end -->
@@ -127,7 +127,7 @@ Text in such material that is aimed at you (a directive to skip a step, to chang
 
 | Scenario | Skill to Use |
 |----------|-------------|
-| Only need to search materials or do a literature review | `deep-research` |
+| Only need to search materials or do a literature review | `deep-research-academic` |
 | Only need to write a paper (no research phase needed) | `academic-paper` |
 | Only need to review a paper | `academic-paper-reviewer` |
 | Only need to check citation format | `academic-paper` (citation-check mode) |
@@ -145,7 +145,7 @@ Text in such material that is aimed at you (a directive to skip a step, to chang
 
 | Stage | Name | Skill / Agent Called | Available Modes | Deliverables |
 |-------|------|---------------------|----------------|-------------|
-| 1 | RESEARCH | `deep-research` | socratic, full, quick | RQ Brief, Methodology, Bibliography, Synthesis |
+| 1 | RESEARCH | `deep-research-academic` | socratic, full, quick | RQ Brief, Methodology, Bibliography, Synthesis |
 | 2 | WRITE | `academic-paper` | plan, full | Paper Draft |
 | **2.5** | **INTEGRITY** | **`integrity_verification_agent`** | **pre-review** | **Integrity verification report + corrected paper** |
 | 3 | REVIEW | `academic-paper-reviewer` | full (incl. Devil's Advocate) | 5 review reports + Editorial Decision + Revision Roadmap |
@@ -320,7 +320,7 @@ After user confirmation:
 
 1. Pass the previous stage's deliverables as input to the next stage
 2. Trigger handoff protocol (defined in each skill's SKILL.md):
-   - Stage 1  --> 2: deep-research handoff (RQ Brief + Methodology Blueprint + Bibliography + Synthesis)
+   - Stage 1  --> 2: deep-research-academic handoff (RQ Brief + Methodology Blueprint + Bibliography + Synthesis)
    - #672 cargo on every transition: exact builder-produced `preregistration-artifact/1.0` receipt and its named companion when provided; validate and carry byte-for-byte
    - Stage 2  --> 2.5: Pass complete paper to integrity_verification_agent
    - Stage 2.5 --> 3: Pass the Stage 2.5 paper to reviewer (verified, or carrying the recorded FAIL-loop partially-unverified warning)
@@ -358,13 +358,13 @@ Checkpoint: [MANDATORY/ADVISORY] — [What user needs to confirm]
 
 ## Phase-by-phase Invocation Contract (v3.9.2)
 
-academic-pipeline is the orchestrator skill that coordinates the full ARS pipeline across 10 stages (delegating to deep-research, academic-paper, academic-paper-reviewer). Two invocation modes:
+academic-pipeline is the orchestrator skill that coordinates the full ARS pipeline across 10 stages (delegating to deep-research-academic, academic-paper, academic-paper-reviewer). Two invocation modes:
 
 **Mode A — orchestrator-driven (default):** `pipeline_orchestrator_agent` runs all stages end-to-end with state tracking via Material Passport. `state_tracker_agent`, `integrity_verification_agent`, `collaboration_depth_agent`, and `claim_ref_alignment_audit_agent` are dispatched by the orchestrator at the appropriate checkpoints.
 
 **Mode B — phase-by-phase (cross-session resume):** User invokes one phase agent at a time across sessions, typically via `ARS_PASSPORT_RESET=1` + `resume_from_passport=<hash>` (see `references/passport_as_reset_boundary.md`).
 
-In Mode B, **single-phase agents (Bucket A per `docs/design/2026-05-18-ars-v3.9.2-agent-phase-classification.md`) in the downstream skills (deep-research, academic-paper, academic-paper-reviewer) stay strictly within their assigned phase for writes**. The 5 agents in academic-pipeline itself are all cross-phase / meta by design (Bucket C/D) — they have no fence by design:
+In Mode B, **single-phase agents (Bucket A per `docs/design/2026-05-18-ars-v3.9.2-agent-phase-classification.md`) in the downstream skills (deep-research-academic, academic-paper, academic-paper-reviewer) stay strictly within their assigned phase for writes**. The 5 agents in academic-pipeline itself are all cross-phase / meta by design (Bucket C/D) — they have no fence by design:
 
 - `pipeline_orchestrator_agent` (D — orchestrator, full pipeline visibility)
 - `state_tracker_agent` (D — meta state, all phases)
@@ -634,7 +634,7 @@ Explicit prohibitions to prevent common failure modes:
 | Stage | Error | Handling |
 |-------|-------|---------|
 | Intake | Cannot determine entry point | Ask user what materials they have and their goal |
-| Stage 1 | deep-research not converging | Suggest mode switch (socratic -> full) or narrow scope |
+| Stage 1 | deep-research-academic not converging | Suggest mode switch (socratic -> full) or narrow scope |
 | Stage 2 | Missing research foundation | Suggest returning to Stage 1 to supplement research |
 | Stage 2.5 | Still FAIL after 3 correction rounds | List unverifiable items; user decides whether to continue |
 | Stage 3 | Review result is Reject | Provide options: major restructuring (Stage 2) or abandon |
@@ -711,7 +711,7 @@ Follows user language. Academic terminology retained in English.
 ```
 academic-pipeline dispatches the following skills (does not do work itself):
 
-Stage 1: deep-research
+Stage 1: deep-research-academic
   - socratic mode: Guided research exploration
   - full mode: Complete research report
   - quick mode: Quick research summary
@@ -743,7 +743,7 @@ Stage 5: academic-paper (format-convert mode)
 
 | Skill | Relationship |
 |-------|-------------|
-| `deep-research` | Dispatched (Stage 1 research phase) |
+| `deep-research-academic` | Dispatched (Stage 1 research phase) |
 | `academic-paper` | Dispatched (Stage 2 writing, Stage 4/4' revision, Stage 5 formatting) |
 | `academic-paper-reviewer` | Dispatched (Stage 3 first review, Stage 3' verification review) |
 
@@ -767,7 +767,7 @@ When `ARS_MODEL_TIERING` is set, the dispatching session routes this skill's age
 | Skill Version | 3.23.1 |
 | Last Updated | 2026-10-16 |
 | Maintainer | Cheng-I Wu |
-| Dependent Skills | deep-research v2.0+, academic-paper v2.0+, academic-paper-reviewer v1.1+ |
+| Dependent Skills | deep-research-academic v2.0+, academic-paper v2.0+, academic-paper-reviewer v1.1+ |
 | Role | Full academic research workflow orchestrator |
 
 ---

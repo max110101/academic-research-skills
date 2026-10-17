@@ -14,7 +14,7 @@ Writes into OUT_DIR (prefix TA_ or FT_):
   <P>_prisma_counts.json / .md   PRISMA 2020 numbers (+ a Mermaid flow diagram)
   <P>_methods_selection.md       methods paragraph and AI-use statement, with [TO COMPLETE] slots
   <P>_literature_corpus.yaml     advanced (TA) or included (FT) records as literature_corpus[]
-                                 entries for Academic Research Skills (academic-paper / deep-research)
+                                 entries for Academic Research Skills (academic-paper / deep-research-academic)
 Nothing here is final while records are pending: the summary says so and no methods text is written.
 """
 import argparse
@@ -89,7 +89,7 @@ def write_corpus(path, rows, stage, when):
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write("# literature_corpus[] entries for Academic Research Skills (literature_corpus_entry.schema.json).\n")
         f.write(f"# Produced by {srlib.TOOL} {srlib.VERSION}. Paste under `literature_corpus:` in a Material Passport,\n")
-        f.write("# or give the file to academic-paper / deep-research as your curated corpus.\n")
+        f.write("# or give the file to academic-paper / deep-research-academic as your curated corpus.\n")
         if not ok:
             f.write("[]\n")
         for e in ok:

@@ -8,7 +8,7 @@ metadata:
   data_access_level: raw
   task_type: open-ended
   related_skills:
-    - deep-research
+    - deep-research-academic
     - academic-paper-reviewer
     - academic-pipeline
 ---
@@ -39,7 +39,7 @@ Otherwise, classify the user's input:
 3. **Ambiguous intent, no materials** — user provides no artifacts and no clear request:
    → Clarify per `shared/references/intent_clarification_protocol.md`.
 
-**Screening boundary (sr-screener):** a request to screen records the user already has (database exports, pasted abstracts, full-text PDFs) against a review's eligibility criteria, or to build a screening protocol, pilot the screening, adjudicate screening conflicts, audit exclusions, or report the selection counts, routes to `sr-screener`. A request to write a literature review, or to run a systematic review, meta-analysis, or PRISMA report, does not route to `sr-screener`. Screening starts only when the user asks for it: `deep-research` `systematic-review` mode may mention `sr-screener`, but never hands over to it automatically.
+**Screening boundary (sr-screener):** a request to screen records the user already has (database exports, pasted abstracts, full-text PDFs) against a review's eligibility criteria, or to build a screening protocol, pilot the screening, adjudicate screening conflicts, audit exclusions, or report the selection counts, routes to `sr-screener`. A request to write a literature review, or to run a systematic review, meta-analysis, or PRISMA report, does not route to `sr-screener`. Screening starts only when the user asks for it: `deep-research-academic` `systematic-review` mode may mention `sr-screener`, but never hands over to it automatically.
 
 **Anti-pattern (caused #133):** Receiving ambiguous cross-phase materials and silently auto-routing to a single-phase agent based on which phase the materials "look closest to." This bypasses orchestrator-level reconciliation and lets the subagent inherit the full ambiguity without independent oversight.
 <!-- routing-core:end -->
@@ -107,13 +107,13 @@ Activate `plan` mode when the user wants guidance, step-by-step planning, or exp
 
 | Scenario | Use Instead |
 |----------|-------------|
-| Deep research / fact-checking (not paper writing) | `deep-research` |
+| Deep research / fact-checking (not paper writing) | `deep-research-academic` |
 | Reviewing a paper (structured review) | `academic-paper-reviewer` |
 | Full research-to-paper pipeline | `academic-pipeline` |
 
-### Distinction from `deep-research`
+### Distinction from `deep-research-academic`
 
-| Feature | `academic-paper` | `deep-research` |
+| Feature | `academic-paper` | `deep-research-academic` |
 |---------|-------------------|-----------------|
 | Primary output | Publishable paper draft | Research report |
 | Structure | Journal-ready (IMRaD, etc.) | APA 7.0 report |
@@ -364,7 +364,7 @@ See `references/mode_selection_guide.md` for details.
 | Just need an abstract | `abstract-only` | fidelity |
 | Need to check/fix citations | `citation-check` | fidelity |
 | Need to convert format (LaTeX, DOCX) or citation style | `format-convert` | fidelity |
-| Want a literature review section or paper (to conduct a systematic review, use `deep-research` `systematic-review` mode) | `lit-review` | fidelity |
+| Want a literature review section or paper (to conduct a systematic review, use `deep-research-academic` `systematic-review` mode) | `lit-review` | fidelity |
 | Need a venue-specific AI-usage disclosure bundle for submission | `disclosure` | fidelity |
 | Have a written rebuttal draft to QA against reviewer comments | `rebuttal-audit` | fidelity |
 
@@ -389,8 +389,8 @@ The author decides whether to run a systematic review. ARS reminds the author th
 
 **When to show it.** Show the note at the first of these two points. Both are actions the author takes:
 
-1. The author selects `lit-review` mode (in `deep-research` or `academic-paper`, by slash command or by request).
-2. The author confirms the research question: in `deep-research` `full` mode, the author confirms the RQ Brief before Phase 2; in `socratic` mode, the author confirms the Mentor's closing RQ Brief or RQ Summary as their research question. Show the note right after that confirmation. A Socratic ending the author has not confirmed (a turn-cap ending, an ending the author calls unfinished, the stagnation suggestion to switch to `full` mode, or a switch to `full` mode) is not this point; a later confirmation is.
+1. The author selects `lit-review` mode (in `deep-research-academic` or `academic-paper`, by slash command or by request).
+2. The author confirms the research question: in `deep-research-academic` `full` mode, the author confirms the RQ Brief before Phase 2; in `socratic` mode, the author confirms the Mentor's closing RQ Brief or RQ Summary as their research question. Show the note right after that confirmation. A Socratic ending the author has not confirmed (a turn-cap ending, an ending the author calls unfinished, the stagnation suggestion to switch to `full` mode, or a switch to `full` mode) is not this point; a later confirmation is.
 
 Whether the note appears must not depend on the topic, the wording, or the kind of research question. Do not show it at any other point, and do not show it, or hold it back, because a question looks like an effect question.
 
@@ -409,7 +409,7 @@ Whether the note appears must not depend on the topic, the wording, or the kind 
 **After the reply.**
 
 - Skip, or a reply that keeps the current work: continue in the current mode. Skipping is a decision.
-- Systematic review: offer `deep-research` `systematic-review` mode, and enter it only when the author confirms.
+- Systematic review: offer `deep-research-academic` `systematic-review` mode, and enter it only when the author confirms.
 - Scoping review or rapid review: continue in the current mode, and say once that ARS has no separate mode for this form, so its protocol and reporting checklist (PRISMA-ScR for a scoping review) stay with the author.
 - Narrative or integrative review, or no formal review: continue in the current mode.
 - In a run with a passport file, record the note through `scripts/run_ledger.py append`: before waiting, unless the ledger already holds one, a `checkpoint_opened` entry (`checkpoint_id: review-form-note`, `stage`: the current stage or mode, `checkpoint_type: SLIM`, `question`: the note as shown, `options`: the five forms and `skip`); after the reply, a `checkpoint_closed` entry with `answer`: the form chosen or `skip`, and the author's exact words in `user_words`.
@@ -500,16 +500,16 @@ Socratic mode that guides users through paper planning one chapter at a time. Bu
 
 ---
 
-## Handoff Protocol: deep-research -> academic-paper
+## Handoff Protocol: deep-research-academic -> academic-paper
 
-`intake_agent` automatically detects deep-research materials (RQ Brief /
+`intake_agent` automatically detects deep-research-academic materials (RQ Brief /
 Bibliography / Synthesis / INSIGHT Collection) and skips redundant steps. It
 also requires the exact builder-produced `preregistration-artifact/1.0` handoff
 receipt and, when provided, its explicitly named companion. Intake validates and
 carries those bytes unchanged; it does not infer status, repair/rebuild the
 sidecar, follow its display path, or substitute a planning template. A later
 explicit user supply must be represented by a new sidecar from the named
-deterministic builder. See `deep-research/SKILL.md` Handoff Protocol and
+deterministic builder. See `deep-research-academic/SKILL.md` Handoff Protocol and
 `shared/references/cross_document_consistency_advisory_protocol.md`.
 
 ---
@@ -520,7 +520,7 @@ See `references/failure_paths.md` for details. Quick reference:
 
 | Failure Scenario | Handling Strategy |
 |---------|---------|
-| Insufficient research foundation | Recommend running `deep-research` first |
+| Insufficient research foundation | Recommend running `deep-research-academic` first |
 | Wrong paper structure selected | Return to Phase 2, suggest alternative structure |
 | Word count significantly over/under target | Identify problematic chapters, suggest trimming/expansion |
 | Citation format entirely wrong | Re-run the entire citation phase |
@@ -558,7 +558,7 @@ See `agents/intake_agent.md` for the complete field definitions of the Phase 0 c
 - Integrity (v3.3): `anti_leakage_protocol` (knowledge isolation), `vlm_figure_verification` (optional VLM figure check)
 - Policy anchors (#108): `policy_anchor_table`, `policy_anchor_disclosure_protocol`
 - Meta: `changelog` (version history)
-- Also: `deep-research/references/apa7_style_guide.md` (base reference, extended here)
+- Also: `deep-research-academic/references/apa7_style_guide.md` (base reference, extended here)
 
 **Templates** (11 files in `templates/`): `imrad`, `literature_review`, `case_study`, `theoretical_paper`, `policy_brief`, `conference_paper`, `latex_article_template.tex`, `bilingual_abstract`, `credit_statement`, `funding_statement`, `revision_tracking` (4 status types).
 
@@ -627,7 +627,7 @@ Follows the user's language. Academic terminology is kept in English. The biling
 
 ```
 academic-paper + tw-hei-intelligence  -> Evidence-based HEI paper with real MOE data
-academic-paper + deep-research        -> Deep research phase -> paper writing phase (auto-handoff)
+academic-paper + deep-research-academic        -> Deep research phase -> paper writing phase (auto-handoff)
 academic-paper + report-to-website    -> Interactive web version of the paper
 academic-paper + notebooklm-slides-generator -> Presentation slides from paper
 academic-paper + academic-paper-reviewer -> Peer review -> revision loop
@@ -653,7 +653,7 @@ When `ARS_MODEL_TIERING` is set, the dispatching session routes this skill's age
 | Skill Version | 3.3.1 |
 | Last Updated | 2026-08-15 |
 | Maintainer | Cheng-I Wu |
-| Dependent Skills | deep-research v1.0+ (upstream), academic-paper-reviewer v1.0+ (downstream) |
+| Dependent Skills | deep-research-academic v1.0+ (upstream), academic-paper-reviewer v1.0+ (downstream) |
 
 ---
 
